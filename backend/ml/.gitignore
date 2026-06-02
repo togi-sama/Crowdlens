@@ -1,0 +1,11 @@
+# Trained model weights — regenerate with train.py
+models/*.pt
+
+# Meta is re-generated too, but small enough to optionally commit
+# models/meta.json
+
+# Python cache
+__pycache__/
+*.py[cod]
+.venv/
+venv/

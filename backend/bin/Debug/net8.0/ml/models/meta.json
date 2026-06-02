@@ -1,0 +1,27 @@
+{
+  "1": {
+    "val_mse": 0.027057,
+    "val_rmse": 0.1645,
+    "samples": 2131
+  },
+  "2": {
+    "val_mse": 0.029947,
+    "val_rmse": 0.1731,
+    "samples": 2131
+  },
+  "3": {
+    "val_mse": 0.022499,
+    "val_rmse": 0.15,
+    "samples": 2131
+  },
+  "4": {
+    "val_mse": 0.027059,
+    "val_rmse": 0.1645,
+    "samples": 2131
+  },
+  "5": {
+    "val_mse": 0.020316,
+    "val_rmse": 0.1425,
+    "samples": 2131
+  }
+}
