@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { CalendarDays, Camera, Check, ChevronLeft, Mail, MapPin, UserRound } from "lucide-react";
 import { getUserProfile, updateUserProfile, type UserProfile } from "../api/userService";
 import "./Profile.css";
 
@@ -96,7 +97,10 @@ export default function Profile() {
     return (
       <div className="profile-page">
         <div className="profile-topbar">
-          <button className="back-btn" onClick={() => navigate("/settings")}>‹ Back</button>
+          <button className="back-btn" onClick={() => navigate("/settings")}>
+            <ChevronLeft size={18} />
+            Back
+          </button>
           <h1 className="profile-topbar-title">Edit Profile</h1>
           <div style={{ width: 60 }} />
         </div>
@@ -112,18 +116,19 @@ export default function Profile() {
       {/* Header */}
       <div className="profile-topbar">
         <button className="back-btn" onClick={() => navigate("/settings")}>
-          ‹ Back
+          <ChevronLeft size={18} />
+          Back
         </button>
         <h1 className="profile-topbar-title">Edit Profile</h1>
-        <div style={{ width: 60 }} />
+        <div className="topbar-spacer" />
       </div>
 
       {/* Avatar */}
       <div className="avatar-section">
         <div className="avatar-ring">
           <img src={avatarSrc} alt="Profile" className="avatar-img" />
-          <button className="avatar-edit-btn" onClick={handleAvatarClick}>
-            <span className="camera-icon">📷</span>
+          <button className="avatar-edit-btn" onClick={handleAvatarClick} aria-label="Change profile photo">
+            <Camera size={15} />
           </button>
         </div>
         <input
@@ -149,7 +154,10 @@ export default function Profile() {
           <p className="form-section-label">Identity</p>
 
           <div className="field-group">
-            <label className="field-label">Username</label>
+            <label className="field-label">
+              <UserRound size={13} />
+              Username
+            </label>
             <input
               className="field-input"
               type="text"
@@ -194,7 +202,10 @@ export default function Profile() {
           <p className="form-section-label">Contact</p>
 
           <div className="field-group">
-            <label className="field-label">Email</label>
+            <label className="field-label">
+              <Mail size={13} />
+              Email
+            </label>
             <input
               className="field-input"
               type="email"
@@ -206,7 +217,10 @@ export default function Profile() {
           </div>
 
           <div className="field-group">
-            <label className="field-label">Address</label>
+            <label className="field-label">
+              <MapPin size={13} />
+              Address
+            </label>
             <input
               className="field-input"
               type="text"
@@ -223,7 +237,10 @@ export default function Profile() {
           <p className="form-section-label">Personal</p>
 
           <div className="field-group">
-            <label className="field-label">Birthday</label>
+            <label className="field-label">
+              <CalendarDays size={13} />
+              Birthday
+            </label>
             <input
               className="field-input"
               type="date"
@@ -237,17 +254,26 @@ export default function Profile() {
         {/* Actions */}
         <div className="form-actions">
           <button
-            className="save-btn"
+            className="save-btn profile-action-btn"
+            type="button"
             onClick={handleSave}
             disabled={!isDirty || saving}
           >
-            {saving ? "Saving…" : saved ? "✓ Saved!" : "Save Changes"}
+            {saving ? "Saving..." : saved ? (
+              <>
+                <Check size={17} />
+                Saved
+              </>
+            ) : "Save Changes"}
           </button>
-          {isDirty && !saving && (
-            <button className="discard-btn" onClick={handleDiscard}>
-              Discard
-            </button>
-          )}
+          <button
+            className="discard-btn profile-action-btn"
+            type="button"
+            onClick={handleDiscard}
+            disabled={!isDirty || saving}
+          >
+            Discard
+          </button>
         </div>
       </div>
     </div>

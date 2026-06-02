@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 20px;
+  padding: 32px 16px;
   box-sizing: border-box;
   font-family: 'Inter', Arial, sans-serif;
   position: relative;
@@ -43,10 +43,10 @@
   position: relative;
   z-index: 1;
   width: 100%;
-  max-width: 680px;
+  max-width: 620px;
   background: #ffffff;
-  border-radius: 20px;
-  padding: 48px 44px;
+  border-radius: 8px;
+  padding: 38px;
   border: 1px solid rgba(48, 146, 76, 0.1);
   box-shadow:
     0 2px 8px rgba(48, 146, 76, 0.06),
@@ -59,15 +59,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .reg-logo {
-  width: 72px;
+  width: 64px;
 }
 
 .reg-logo-text {
-  width: 180px;
+  width: 164px;
   margin-top: 10px;
 }
 
@@ -84,7 +84,7 @@
 .reg-subtitle {
   font-size: 14px;
   color: #6b7280;
-  margin: 0 0 28px;
+  margin: 0 0 24px;
   line-height: 1.5;
   text-align: center;
 }
@@ -99,8 +99,8 @@
 .reg-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 14px;
 }
 
 .reg-field {
@@ -181,7 +181,7 @@
   margin-top: 8px;
   padding: 13px 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   background: #30924c;
   color: #ffffff;
   font-weight: 700;
@@ -250,7 +250,8 @@
 /* ── Tablet (≤ 720px) ── */
 @media (max-width: 720px) {
   .register-card {
-    padding: 40px 28px;
+    max-width: 430px;
+    padding: 32px 24px;
   }
 
   .reg-row {
@@ -261,24 +262,32 @@
 /* ── Mobile (≤ 480px) ── */
 @media (max-width: 480px) {
   .register-page {
-    padding: 32px 16px 56px;
+    padding: 16px 12px 40px;
     align-items: flex-start;
   }
 
   .register-card {
-    padding: 36px 20px;
-    border-radius: 16px;
+    padding: 28px 18px;
+    border-radius: 8px;
   }
 
   .reg-title {
-    font-size: 22px;
+    font-size: 23px;
   }
 
   .reg-logo {
-    width: 60px;
+    width: 52px;
   }
 
   .reg-logo-text {
-    width: 150px;
+    width: 142px;
+  }
+
+  .reg-subtitle {
+    font-size: 13px;
+  }
+
+  .reg-field input {
+    min-height: 44px;
   }
 }

@@ -12,8 +12,14 @@ import TermsOfService from "./pages/Termsofservice";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./context/AuthContext";
 import { ToastContainer } from "./components/Toast";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("cl_theme") === "dark" ? "dark" : "light";
+    document.documentElement.dataset.theme = savedTheme;
+  }, []);
+
   return (
     <AuthProvider>
       <Router>

@@ -63,9 +63,10 @@
 
 /* ── Shared card shell ── */
 .fc-card {
-  margin: 16px;
+  width: min(560px, calc(100% - 32px));
+  margin: 16px auto;
   background: white;
-  border-radius: 16px;
+  border-radius: 8px;
   padding: 20px;
   box-shadow: 0 1px 6px rgba(0,0,0,0.07);
 }

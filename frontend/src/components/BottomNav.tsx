@@ -28,7 +28,11 @@ interface NavLink {
   renderIcon?: (active: boolean) => React.ReactNode;
 }
 
-export default function BottomNav() {
+interface BottomNavProps {
+  onHomeClick?: () => void;
+}
+
+export default function BottomNav({ onHomeClick }: BottomNavProps) {
   const { pathname } = useLocation();
 
   const links: NavLink[] = [
@@ -55,9 +59,15 @@ export default function BottomNav() {
     <nav className="bottom-nav" aria-label="Main navigation">
       {links.map(({ to, label, icon, iconActive, renderIcon }) => {
         const active = pathname === to;
+        const handleClick = label === "Home" ? onHomeClick : undefined;
         return (
           <div className="nav-section" key={to}>
-            <Link to={to} className="nav-item" aria-current={active ? "page" : undefined}>
+            <Link
+              to={to}
+              className="nav-item"
+              aria-current={active ? "page" : undefined}
+              onClick={handleClick}
+            >
               {renderIcon ? (
                 renderIcon(active)
               ) : (

@@ -1,0 +1,802 @@
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cl-bg: #07110b;
+  --cl-surface: #101c15;
+  --cl-surface-2: #15261b;
+  --cl-surface-3: #1a2d21;
+  --cl-border: #294234;
+  --cl-text: #f3f7f4;
+  --cl-muted: #a8b7ad;
+  --cl-soft: #7f9287;
+  --cl-green: #53c979;
+  --cl-green-strong: #35a85d;
+  --cl-danger: #f87171;
+  --cl-warning: #f59e0b;
+  --cl-shadow: 0 18px 38px rgba(0, 0, 0, 0.36);
+}
+
+html[data-theme="dark"],
+html[data-theme="dark"] body,
+html[data-theme="dark"] #root {
+  background: var(--cl-bg);
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .user-home-page,
+html[data-theme="dark"] .profile-page,
+html[data-theme="dark"] .settings-page,
+html[data-theme="dark"] .favorites-page,
+html[data-theme="dark"] .manage-locations-page,
+html[data-theme="dark"] .legal-page,
+html[data-theme="dark"] .forecast-page,
+html[data-theme="dark"] .login-page,
+html[data-theme="dark"] .register-page,
+html[data-theme="dark"] .loading-screen {
+  background:
+    linear-gradient(180deg, rgba(7, 17, 11, 0.94), rgba(12, 24, 16, 0.92)),
+    url('/Image2.png') center / cover fixed;
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .register-blob {
+  opacity: 0.22;
+}
+
+html[data-theme="dark"] .home-header,
+html[data-theme="dark"] .profile-topbar,
+html[data-theme="dark"] .settings-header,
+html[data-theme="dark"] .legal-topbar,
+html[data-theme="dark"] .fc-header,
+html[data-theme="dark"] .login-showcase {
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .welcome-title,
+html[data-theme="dark"] .settings-header-title,
+html[data-theme="dark"] .page-label,
+html[data-theme="dark"] .profile-topbar-title,
+html[data-theme="dark"] .legal-topbar-title,
+html[data-theme="dark"] .fc-header-title,
+html[data-theme="dark"] .reg-title,
+html[data-theme="dark"] .favorite-card h3,
+html[data-theme="dark"] .fc-empty-title,
+html[data-theme="dark"] .fc-alt-name,
+html[data-theme="dark"] .map-header-title h2 {
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .welcome-subtitle,
+html[data-theme="dark"] .settings-header-sub,
+html[data-theme="dark"] .profile-email,
+html[data-theme="dark"] .profile-bio,
+html[data-theme="dark"] .settings-section-label,
+html[data-theme="dark"] .favorite-item,
+html[data-theme="dark"] .empty-text,
+html[data-theme="dark"] .delete-confirm-text,
+html[data-theme="dark"] .legal-section-body,
+html[data-theme="dark"] .legal-footer-note,
+html[data-theme="dark"] .fc-header-sub,
+html[data-theme="dark"] .fc-label,
+html[data-theme="dark"] .fc-empty,
+html[data-theme="dark"] .fc-empty-desc,
+html[data-theme="dark"] .fc-location-label,
+html[data-theme="dark"] .fc-section-label,
+html[data-theme="dark"] .fc-disclaimer,
+html[data-theme="dark"] .reg-subtitle,
+html[data-theme="dark"] .reg-hint,
+html[data-theme="dark"] .floating-card span {
+  color: var(--cl-muted);
+}
+
+html[data-theme="dark"] .tab-switcher,
+html[data-theme="dark"] .stat-card,
+html[data-theme="dark"] .map-section,
+html[data-theme="dark"] .map-header,
+html[data-theme="dark"] .profile-card,
+html[data-theme="dark"] .karma-card-inner,
+html[data-theme="dark"] .settings-options,
+html[data-theme="dark"] .settings-panel,
+html[data-theme="dark"] .admin-section,
+html[data-theme="dark"] .favorite-card,
+html[data-theme="dark"] .legal-section,
+html[data-theme="dark"] .legal-footer-note,
+html[data-theme="dark"] .fc-card,
+html[data-theme="dark"] .fc-summary,
+html[data-theme="dark"] .register-card,
+html[data-theme="dark"] .floating-card,
+html[data-theme="dark"] .avatar-section,
+html[data-theme="dark"] .form-section,
+html[data-theme="dark"] .location-search-input-wrapper,
+html[data-theme="dark"] .location-search-results,
+html[data-theme="dark"] .map-search-toggle,
+html[data-theme="dark"] .bottom-nav,
+html[data-theme="dark"] .modal-content,
+html[data-theme="dark"] .alert-modal,
+html[data-theme="dark"] .toast,
+html[data-theme="dark"] .leaflet-popup-content-wrapper,
+html[data-theme="dark"] .popup-container {
+  background: var(--cl-surface);
+  border-color: var(--cl-border);
+  color: var(--cl-text);
+  box-shadow: var(--cl-shadow);
+}
+
+html[data-theme="dark"] .map-header,
+html[data-theme="dark"] .form-section-label,
+html[data-theme="dark"] .legal-section-header,
+html[data-theme="dark"] .fc-summary,
+html[data-theme="dark"] .location-search-clear,
+html[data-theme="dark"] .fc-select,
+html[data-theme="dark"] .fc-pill,
+html[data-theme="dark"] .field-input,
+html[data-theme="dark"] .reg-field input {
+  background: var(--cl-surface-2);
+  border-color: var(--cl-border);
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] input,
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] select {
+  background-color: var(--cl-surface-2);
+  color: var(--cl-text);
+  border-color: var(--cl-border);
+}
+
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder {
+  color: var(--cl-soft);
+}
+
+html[data-theme="dark"] .settings-action,
+html[data-theme="dark"] .field-label,
+html[data-theme="dark"] .profile-name,
+html[data-theme="dark"] .reg-field label,
+html[data-theme="dark"] .floating-card strong,
+html[data-theme="dark"] .activity-location,
+html[data-theme="dark"] .dashboard-card-title h3,
+html[data-theme="dark"] .analytics-value {
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .settings-action:hover,
+html[data-theme="dark"] .location-search-item:hover,
+html[data-theme="dark"] .fc-back-btn:hover,
+html[data-theme="dark"] .profile-edit-btn:hover,
+html[data-theme="dark"] .cancel-btn:hover {
+  background: var(--cl-surface-3);
+}
+
+html[data-theme="dark"] .header-forecast-btn,
+html[data-theme="dark"] .back-btn,
+html[data-theme="dark"] .legal-back-btn,
+html[data-theme="dark"] .profile-edit-btn,
+html[data-theme="dark"] .fc-back-btn,
+html[data-theme="dark"] .cancel-btn {
+  background: var(--cl-surface-2);
+  border-color: var(--cl-border);
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .tab-btn {
+  color: var(--cl-muted);
+}
+
+html[data-theme="dark"] .tab-btn-active,
+html[data-theme="dark"] .fc-pill-active,
+html[data-theme="dark"] .fc-btn,
+html[data-theme="dark"] .save-btn,
+html[data-theme="dark"] .admin-btn,
+html[data-theme="dark"] .toggle-button.enabled,
+html[data-theme="dark"] .create-report-btn,
+html[data-theme="dark"] .report-btn {
+  background: var(--cl-green-strong);
+  border-color: var(--cl-green-strong);
+  color: #ffffff;
+}
+
+html[data-theme="dark"] .stat-card-warning .stat-card-icon,
+html[data-theme="dark"] .fc-alert {
+  background: rgba(245, 158, 11, 0.16);
+  color: var(--cl-warning);
+  border-color: rgba(245, 158, 11, 0.36);
+}
+
+html[data-theme="dark"] .stat-card-blue .stat-card-icon,
+html[data-theme="dark"] .stat-card-purple .stat-card-icon,
+html[data-theme="dark"] .stat-card-green .stat-card-icon,
+html[data-theme="dark"] .fc-empty-icon-wrap,
+html[data-theme="dark"] .map-alert-chip,
+html[data-theme="dark"] .settings-status-badge.on,
+html[data-theme="dark"] .karma-rank-badge {
+  background: rgba(83, 201, 121, 0.14);
+  color: var(--cl-green);
+  border-color: rgba(83, 201, 121, 0.3);
+}
+
+html[data-theme="dark"] .settings-status-badge.off,
+html[data-theme="dark"] .delete-btn,
+html[data-theme="dark"] .discard-btn,
+html[data-theme="dark"] .logout-option .settings-action {
+  color: var(--cl-danger);
+}
+
+html[data-theme="dark"] .discard-btn:disabled {
+  background: rgba(21, 38, 27, 0.72);
+  border-color: var(--cl-border);
+  color: var(--cl-soft);
+}
+
+html[data-theme="dark"] .profile-card {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.08), rgba(16, 28, 21, 0.94)),
+    var(--cl-surface);
+  border-color: rgba(83, 201, 121, 0.22);
+}
+
+html[data-theme="dark"] .profile-picture {
+  border-color: rgba(243, 247, 244, 0.86);
+}
+
+html[data-theme="dark"] .profile-edit-btn {
+  background: rgba(83, 201, 121, 0.12);
+  border: 1px solid rgba(83, 201, 121, 0.18);
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .form-actions {
+  background: linear-gradient(180deg, rgba(12, 24, 16, 0), rgba(12, 24, 16, 0.72) 24%, rgba(12, 24, 16, 0.88));
+  backdrop-filter: blur(10px);
+}
+
+html[data-theme="dark"] .nav-text {
+  color: var(--cl-soft);
+}
+
+html[data-theme="dark"] .nav-text-active {
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .leaflet-container {
+  background: #0b1710;
+  filter: brightness(0.78) contrast(1.08) saturate(0.86);
+}
+
+html[data-theme="dark"] .leaflet-control,
+html[data-theme="dark"] .leaflet-control a {
+  background: var(--cl-surface);
+  border-color: var(--cl-border);
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .leaflet-popup-tip {
+  background: var(--cl-surface);
+}
+
+html[data-theme="dark"] .karma-card::before,
+html[data-theme="dark"] .karma-card.karma-pos::before,
+html[data-theme="dark"] .karma-card.karma-zero::before {
+  background: linear-gradient(135deg, #53c979 0%, #35a85d 58%, #1d6e3d 100%);
+}
+
+html[data-theme="dark"] .karma-card.karma-neg::before {
+  background: linear-gradient(135deg, #f87171 0%, #dc2626 62%, #7f1d1d 100%);
+}
+
+html[data-theme="dark"] .karma-card.karma-zero .karma-card-inner,
+html[data-theme="dark"] .karma-card.karma-pos .karma-card-inner {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.13), rgba(16, 28, 21, 0.98)),
+    var(--cl-surface);
+}
+
+html[data-theme="dark"] .karma-card.karma-neg .karma-card-inner {
+  background:
+    linear-gradient(160deg, rgba(248, 113, 113, 0.13), rgba(28, 16, 16, 0.98)),
+    var(--cl-surface);
+}
+
+html[data-theme="dark"] .karma-icon,
+html[data-theme="dark"] .karma-progress-track {
+  background: rgba(83, 201, 121, 0.14);
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .karma-eyebrow,
+html[data-theme="dark"] .karma-score,
+html[data-theme="dark"] .karma-score.pos,
+html[data-theme="dark"] .karma-score-copy span,
+html[data-theme="dark"] .karma-progress-label strong {
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .karma-score.neg {
+  color: var(--cl-danger);
+}
+
+html[data-theme="dark"] .karma-card.karma-neg .karma-icon,
+html[data-theme="dark"] .karma-card.karma-neg .karma-rank-badge,
+html[data-theme="dark"] .karma-card.karma-neg .karma-score-copy span,
+html[data-theme="dark"] .karma-card.karma-neg .karma-progress-label strong {
+  color: var(--cl-danger);
+}
+
+html[data-theme="dark"] .karma-card.karma-neg .karma-icon,
+html[data-theme="dark"] .karma-card.karma-neg .karma-progress-track {
+  background: rgba(248, 113, 113, 0.14);
+}
+
+html[data-theme="dark"] .karma-progress-track span {
+  background: linear-gradient(90deg, var(--cl-green), var(--cl-green-strong));
+}
+
+html[data-theme="dark"] .karma-card.karma-neg .karma-progress-track span {
+  background: linear-gradient(90deg, #f87171, #dc2626);
+}
+
+/* UserHome dashboard dark-mode consistency */
+html[data-theme="dark"] :is(
+  .dashboard-card,
+  .analytics-card
+) {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.06), rgba(16, 28, 21, 0.96)),
+    var(--cl-surface) !important;
+  border: 1px solid rgba(83, 201, 121, 0.16);
+  box-shadow: var(--cl-shadow);
+}
+
+html[data-theme="dark"] .analytics-icon {
+  background: rgba(83, 201, 121, 0.12) !important;
+}
+
+html[data-theme="dark"] .analytics-change.neutral,
+html[data-theme="dark"] .analytics-change.up {
+  background: rgba(83, 201, 121, 0.12);
+  color: var(--cl-green) !important;
+}
+
+html[data-theme="dark"] .analytics-change.down {
+  background: rgba(248, 113, 113, 0.12);
+  color: var(--cl-danger) !important;
+}
+
+html[data-theme="dark"] :is(
+  .analytics-value,
+  .dashboard-card-title h3,
+  .density-bar-pct,
+  .activity-location
+) {
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] :is(
+  .analytics-label,
+  .dashboard-card-subtitle,
+  .density-bar-label,
+  .activity-time,
+  .dashboard-loading,
+  .dashboard-empty
+) {
+  color: var(--cl-muted) !important;
+}
+
+html[data-theme="dark"] .density-bar-track,
+html[data-theme="dark"] .peak-bar {
+  background: rgba(243, 247, 244, 0.08);
+}
+
+html[data-theme="dark"] .peak-bar-active {
+  background: var(--cl-green-strong);
+}
+
+html[data-theme="dark"] .activity-row {
+  border-bottom-color: rgba(83, 201, 121, 0.12);
+}
+
+html[data-theme="dark"] .dashboard-view :is(.analytics-card, .dashboard-card) p,
+html[data-theme="dark"] .dashboard-view :is(.analytics-card, .dashboard-card) span:not(.analytics-icon):not(.activity-dot):not(.density-bar-fill) {
+  color: inherit;
+}
+
+/* Forecast page contrast and surface fixes */
+html[data-theme="dark"] .fc-header {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.07), rgba(16, 28, 21, 0.98)),
+    var(--cl-surface) !important;
+  border-bottom-color: var(--cl-border);
+}
+
+html[data-theme="dark"] .fc-header-title {
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] .fc-header-sub {
+  color: var(--cl-muted) !important;
+}
+
+html[data-theme="dark"] .fc-back-btn {
+  background: rgba(83, 201, 121, 0.12) !important;
+  border-color: rgba(83, 201, 121, 0.18) !important;
+  color: var(--cl-green) !important;
+}
+
+html[data-theme="dark"] .fc-card {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.05), rgba(16, 28, 21, 0.96)),
+    var(--cl-surface) !important;
+  border: 1px solid rgba(83, 201, 121, 0.14);
+}
+
+html[data-theme="dark"] .fc-select,
+html[data-theme="dark"] .fc-pill {
+  background: rgba(21, 38, 27, 0.82) !important;
+  border-color: var(--cl-border) !important;
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] .fc-select option {
+  background: var(--cl-surface);
+  color: var(--cl-text);
+}
+
+html[data-theme="dark"] .fc-select-arrow {
+  color: var(--cl-muted);
+}
+
+html[data-theme="dark"] .fc-empty-icon-wrap {
+  background: rgba(83, 201, 121, 0.14) !important;
+  color: var(--cl-green);
+}
+
+html[data-theme="dark"] .fc-empty-title {
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] .fc-empty-desc {
+  color: var(--cl-muted) !important;
+}
+
+/* Auth pages intentionally stay light, even when app dark mode is enabled. */
+html[data-theme="dark"] :is(.login-page, .register-page) {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] .login-page {
+  background:
+    linear-gradient(110deg, rgba(243, 248, 245, 0.92), rgba(229, 240, 234, 0.72)),
+    url("/Image2.png") center / cover fixed !important;
+  color: #173221 !important;
+}
+
+html[data-theme="dark"] .register-page {
+  background: linear-gradient(150deg, #f0fbf4 0%, #e4f5eb 30%, #d3eddc 60%, #e0f3e8 100%) !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.login-card, .register-card, .floating-card, .forecast-strip) {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(48, 146, 76, 0.14) !important;
+  color: #173221 !important;
+}
+
+html[data-theme="dark"] :is(
+  .login-page h1,
+  .login-page h2,
+  .login-page h3,
+  .title,
+  .showcase-copy h1,
+  .register-page h1,
+  .reg-title,
+  .floating-card strong
+) {
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(
+  .login-page p,
+  .subtitle,
+  .signup-text,
+  .floating-card span,
+  .register-page p,
+  .reg-subtitle,
+  .reg-hint,
+  .reg-login-text
+) {
+  color: #5f6f66 !important;
+}
+
+html[data-theme="dark"] :is(
+  .login-card label,
+  .reg-field label
+) {
+  color: #26352c !important;
+}
+
+html[data-theme="dark"] :is(.input-wrapper, .reg-field input) {
+  background: #f8fbf9 !important;
+  border-color: #d9e2dc !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.login-card input, .reg-field input) {
+  background: transparent !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.login-card input::placeholder, .reg-field input::placeholder) {
+  color: #9aa6a0 !important;
+}
+
+html[data-theme="dark"] :is(.eyebrow, .signup-text button, .reg-login-link, .toggle-password, .reg-toggle-password) {
+  color: #2f7d49 !important;
+}
+
+html[data-theme="dark"] :is(.login-btn, .reg-submit-btn) {
+  background: #2f7d49 !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .map-preview {
+  background: #dce8df !important;
+  border-color: rgba(23, 50, 33, 0.1) !important;
+  filter: none !important;
+}
+
+/* Favorites page dark-mode consistency */
+html[data-theme="dark"] .favorite-location-icon,
+html[data-theme="dark"] .favorite-threshold-card,
+html[data-theme="dark"] .favorite-item,
+html[data-theme="dark"] .empty-text {
+  background: rgba(83, 201, 121, 0.1);
+  border-color: rgba(83, 201, 121, 0.18);
+}
+
+html[data-theme="dark"] .favorite-card {
+  background:
+    linear-gradient(160deg, rgba(83, 201, 121, 0.06), rgba(16, 28, 21, 0.96)),
+    var(--cl-surface) !important;
+  border-color: rgba(83, 201, 121, 0.18);
+}
+
+html[data-theme="dark"] .favorite-card h3,
+html[data-theme="dark"] .page-label {
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] .favorites-subtitle,
+html[data-theme="dark"] .favorite-item,
+html[data-theme="dark"] .delete-confirm-text,
+html[data-theme="dark"] .empty-text {
+  color: var(--cl-muted) !important;
+}
+
+html[data-theme="dark"] .favorite-type,
+html[data-theme="dark"] .favorite-location-icon,
+html[data-theme="dark"] .favorite-item svg {
+  color: var(--cl-green) !important;
+}
+
+html[data-theme="dark"] .delete-confirm {
+  background: rgba(248, 113, 113, 0.08);
+  border-color: rgba(248, 113, 113, 0.22);
+}
+
+html[data-theme="dark"] .save-link-btn {
+  background: rgba(245, 158, 11, 0.13);
+  border-color: rgba(245, 158, 11, 0.28);
+  color: var(--cl-warning) !important;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="dark"] .save-link-btn.active {
+  background: rgba(83, 201, 121, 0.14);
+  border-color: rgba(83, 201, 121, 0.32);
+  color: var(--cl-green) !important;
+}
+
+
+/* High-priority dark-mode text contrast fixes */
+html[data-theme="dark"] :is(
+  h1,
+  h2,
+  h3,
+  h4,
+  .profile-name,
+  .settings-action-label,
+  .field-input,
+  .field-textarea,
+  .field-select,
+  .stat-card-copy strong,
+  .analytics-value,
+  .analytics-label,
+  .activity-location,
+  .density-bar-pct,
+  .dashboard-card-title h3,
+  .favorite-card h3,
+  .favorite-type,
+  .fc-header-title,
+  .fc-empty-title,
+  .fc-alt-name,
+  .fc-summary-val,
+  .fc-slot-hour,
+  .option-level,
+  .report-header h3,
+  .alert-modal-title,
+  .alert-location-name,
+  .popup-container h2,
+  .congestion-info h3,
+  .rp-location-name,
+  .rl-location-name,
+  .reg-title,
+  .login-title,
+  .showcase-title
+) {
+  color: var(--cl-text) !important;
+}
+
+html[data-theme="dark"] :is(
+  p,
+  label,
+  small,
+  .profile-email,
+  .profile-bio,
+  .settings-header-sub,
+  .settings-section-label,
+  .field-hint,
+  .avatar-hint,
+  .stat-card-copy span,
+  .stat-card-copy small,
+  .map-header-title p,
+  .activity-time,
+  .analytics-change.neutral,
+  .dashboard-card-subtitle,
+  .dashboard-empty,
+  .dashboard-loading,
+  .density-bar-label,
+  .favorite-item,
+  .empty-text,
+  .delete-confirm-text,
+  .fc-header-sub,
+  .fc-label,
+  .fc-empty-desc,
+  .fc-location-label,
+  .fc-section-label,
+  .fc-disclaimer,
+  .fc-slot-conf,
+  .option-desc,
+  .report-header p,
+  .alert-modal-subtitle,
+  .alert-updated,
+  .updated-text,
+  .congestion-info p,
+  .rp-time,
+  .rl-time,
+  .reg-subtitle,
+  .reg-hint,
+  .login-subtitle,
+  .floating-card span
+) {
+  color: var(--cl-muted) !important;
+}
+
+html[data-theme="dark"] :is(
+  a,
+  .back-btn,
+  .legal-back-btn,
+  .header-forecast-btn,
+  .profile-edit-btn,
+  .settings-action-icon,
+  .field-label svg,
+  .location-search-icon,
+  .map-search-toggle,
+  .favorite-type,
+  .legal-section-title,
+  .reg-link,
+  .login-link
+) {
+  color: var(--cl-green) !important;
+}
+
+html[data-theme="dark"] :is(
+  input,
+  textarea,
+  select,
+  button
+) {
+  caret-color: var(--cl-green);
+}
+
+html[data-theme="dark"] :is(
+  .settings-action-chevron,
+  .location-search-clear,
+  .nav-text,
+  .chevron
+) {
+  color: var(--cl-soft) !important;
+}
+
+html[data-theme="dark"] :is(
+  .save-btn,
+  .admin-btn,
+  .fc-btn,
+  .create-report-btn,
+  .report-btn,
+  .input-btn,
+  .tab-btn-active
+) {
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] :is(
+  .delete-btn,
+  .discard-btn,
+  .error-message,
+  .fc-error,
+  .profile-error-text,
+  .settings-action-logout,
+  .logout-option .settings-action
+) {
+  color: var(--cl-danger) !important;
+}
+
+/* Final auth-page override: login/register are always light themed. */
+html[data-theme="dark"] :is(.login-page, .register-page) {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] .login-page {
+  background:
+    linear-gradient(110deg, rgba(243, 248, 245, 0.92), rgba(229, 240, 234, 0.72)),
+    url("/Image2.png") center / cover fixed !important;
+  color: #173221 !important;
+}
+
+html[data-theme="dark"] .register-page {
+  background: linear-gradient(150deg, #f0fbf4 0%, #e4f5eb 30%, #d3eddc 60%, #e0f3e8 100%) !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.login-card, .register-card, .floating-card, .forecast-strip) {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(48, 146, 76, 0.14) !important;
+  color: #173221 !important;
+}
+
+html[data-theme="dark"] :is(.login-page h1, .login-page h2, .title, .showcase-copy h1, .register-page h1, .reg-title, .floating-card strong) {
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.login-page p, .subtitle, .signup-text, .floating-card span, .register-page p, .reg-subtitle, .reg-hint, .reg-login-text) {
+  color: #5f6f66 !important;
+}
+
+html[data-theme="dark"] :is(.login-card label, .reg-field label) {
+  color: #26352c !important;
+}
+
+html[data-theme="dark"] .input-wrapper,
+html[data-theme="dark"] .reg-field input {
+  background: #f8fbf9 !important;
+  border-color: #d9e2dc !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] .login-card input {
+  background: transparent !important;
+  color: #111827 !important;
+}
+
+html[data-theme="dark"] :is(.eyebrow, .signup-text button, .reg-login-link, .toggle-password, .reg-toggle-password) {
+  color: #2f7d49 !important;
+}
+
+html[data-theme="dark"] :is(.login-btn, .reg-submit-btn) {
+  background: #2f7d49 !important;
+  color: #ffffff !important;
+}
+
+html[data-theme="dark"] .profile-page p[style*="color"],
+html[data-theme="dark"] .settings-panel p[style*="color"] {
+  color: var(--cl-muted) !important;
+}

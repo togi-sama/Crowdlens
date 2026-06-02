@@ -23,6 +23,10 @@ import {
   Activity,
   ArrowUpRight,
   ArrowDownRight,
+  Search,
+  X,
+  ChevronDown,
+  ChevronUp,
 } from "lucide-react";
 import type { CrowdLocation, density } from "../types/crowd";
 import { getLiveInsight } from "../types/crowd";
@@ -104,7 +108,7 @@ function Sparkline({ slots, modelType }: { slots: ForecastSlot[]; modelType: str
           background: isLSTM ? "#e8eaf6" : "#e0f2f1",
           color: isLSTM ? "#3949ab" : "#00695c",
         }}>
-          {isLSTM ? "⚡ LSTM" : "📊 Statistical"}
+          {isLSTM ? "LSTM" : "Statistical"}
         </span>
       </p>
       <svg width={W} height={H} style={{ display: "block", overflow: "visible" }}>
@@ -351,12 +355,14 @@ export default function UserHomePage() {
   const [activeTab, setActiveTab] = useState<"home" | "dashboard">("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const [searchPanelOpen, setSearchPanelOpen] = useState(false);
   const searchRef = useRef<HTMLDivElement>(null);
   const [reportsOpenFor, setReportsOpenFor] = useState<number | null>(null);
 
   // Threshold picker state: which location's popup is showing the picker
   const [pendingFavoriteId, setPendingFavoriteId] = useState<number | null>(null);
   const [pendingThreshold, setPendingThreshold] = useState<Threshold>("Low");
+  const [savingFavoriteId, setSavingFavoriteId] = useState<number | null>(null);
 
   const [popupForecast, setPopupForecast] = useState<{ slots: ForecastSlot[]; modelType: string } | null>(null);
   const [, setPopupForecastLoading] = useState(false);
@@ -395,6 +401,7 @@ export default function UserHomePage() {
     const handler = (e: MouseEvent) => {
       if (searchRef.current && !searchRef.current.contains(e.target as Node)) {
         setSearchOpen(false);
+        setSearchPanelOpen(false);
       }
     };
     document.addEventListener("mousedown", handler);
@@ -407,7 +414,15 @@ export default function UserHomePage() {
 
   const handleInitialSelect = (level: string) => {
     setPendingLevel(level);
+    setIsReportModalOpen(false);
     setIsConfirmOpen(true);
+  };
+
+  const keepViewInPlace = (action: () => void) => {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    action();
+    requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
   };
 
   // Clicking the bookmark on an already-favorited location removes it immediately.
@@ -433,14 +448,20 @@ export default function UserHomePage() {
   };
 
   const confirmAddFavorite = async (id: number, threshold: Threshold) => {
-    setPendingFavoriteId(null);
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    setSavingFavoriteId(id);
     setFavoriteIds(prev => new Set(prev).add(id));
     try {
       await addFavorite(id, threshold);
       toastSuccess(`Saved! Alerts fire when crowd is "${threshold}" or below.`);
+      setPendingFavoriteId(null);
     } catch {
       setFavoriteIds(prev => { const s = new Set(prev); s.delete(id); return s; });
       toastError("Failed to save favorite.");
+    } finally {
+      setSavingFavoriteId(null);
+      requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
     }
   };
 
@@ -469,7 +490,6 @@ export default function UserHomePage() {
           await submitCrowdReport(selectedLocation.id, pendingLevel, lat, lng, remark || undefined);
           toastSuccess(`Reported ${pendingLevel} for ${selectedLocation.name}`);
           setIsConfirmOpen(false);
-          setIsReportModalOpen(false);
           const updatedData = await getLocations();
           setLocations(updatedData);
         } catch (error: any) {
@@ -502,30 +522,63 @@ export default function UserHomePage() {
     setActiveTab("home");
     setSearchQuery("");
     setSearchOpen(false);
+    setSearchPanelOpen(false);
   };
 
   const center: [number, number] = [10.3223, 123.8982];
   const displayName = user?.name ? user.name.split(" ")[0] : "there";
   const popupWidth = Math.max(200, Math.min(320, (mapZoom - 10) * 30 + 160));
+  const activeAlerts = locations.filter(l => l.density === "High" || l.density === "Very High").length;
+  const statCards = [
+    {
+      label: "Active Alerts",
+      value: String(activeAlerts),
+      detail: activeAlerts === 1 ? "Area" : "Areas",
+      icon: <AlertTriangle size={18} />,
+      tone: "warning",
+    },
+    {
+      label: "Avg. Crowd",
+      value: avgDensityLabel(locations),
+      detail: "Live level",
+      icon: <Users size={18} />,
+      tone: "blue",
+    },
+    {
+      label: "Locations",
+      value: String(locations.length),
+      detail: "Tracked",
+      icon: <MapPin size={18} />,
+      tone: "purple",
+    },
+    {
+      label: "Favorites",
+      value: String(favoriteIds.size),
+      detail: "Saved",
+      icon: <Activity size={18} />,
+      tone: "green",
+    },
+  ];
 
   return (
     <div className="user-home-page">
       <header className="home-header">
-        <h1 className="welcome-title">CrowdLens</h1>
-        <p className="welcome-subtitle">Welcome back, {displayName}</p>
+        <div>
+          <h1 className="welcome-title">CrowdLens</h1>
+          <p className="welcome-subtitle">Welcome back, {displayName}</p>
+        </div>
+        <button className="header-forecast-btn" onClick={() => navigate("/forecast")}>
+          <TrendingUp size={15} />
+          <span>Forecast</span>
+        </button>
       </header>
 
       <div className="tab-switcher">
         <button
-          className={`tab-btn ${activeTab === "home" ? "tab-btn-active" : ""}`}
-          onClick={() => setActiveTab("home")}
-        >
-          Home
-        </button>
-        <button
           className={`tab-btn ${activeTab === "dashboard" ? "tab-btn-active" : ""}`}
           onClick={() => setActiveTab("dashboard")}
         >
+          <BarChart2 size={16} />
           Dashboard
         </button>
       </div>
@@ -534,62 +587,96 @@ export default function UserHomePage() {
       {activeTab === "home" && (
         <>
           <div className="stats-grid">
-            <div className="stat-card">
-              <span>Active Alerts</span>
-              <strong>
-                {locations.filter(l => l.density === "High" || l.density === "Very High").length} Areas
-              </strong>
-            </div>
-            <div className="stat-card">
-              <span>Locations</span>
-              <strong>{locations.length} Tracked</strong>
-            </div>
-          </div>
-
-          <button className="forecast-link-btn" onClick={() => navigate("/forecast")}>
-            View Forecast
-          </button>
-
-          {/* Location search bar */}
-          <div className="location-search" ref={searchRef}>
-            <div className="location-search-input-wrapper">
-              <span className="location-search-icon">🔍</span>
-              <input
-                className="location-search-input"
-                type="text"
-                placeholder="Search locations…"
-                value={searchQuery}
-                onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
-                onFocus={() => setSearchOpen(true)}
-              />
-              {searchQuery && (
-                <button className="location-search-clear" onClick={() => { setSearchQuery(""); setSearchOpen(false); }}>
-                  ✕
-                </button>
-              )}
-            </div>
-            {searchOpen && filteredLocations.length > 0 && (
-              <ul className="location-search-results">
-                {filteredLocations.map(loc => (
-                  <li key={loc.id} className="location-search-item" onClick={() => handleSearchSelect(loc)}>
-                    <span className="lsi-dot" style={{ color: DENSITY_COLOR[loc.density] }}>●</span>
-                    <div className="lsi-info">
-                      <span className="lsi-name">{loc.name}</span>
-                      <span className="lsi-type">{loc.type}</span>
-                    </div>
-                    <span className="lsi-density" style={{ color: DENSITY_COLOR[loc.density] }}>
-                      {loc.density}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {searchOpen && searchQuery.trim() && filteredLocations.length === 0 && (
-              <div className="location-search-empty">No locations found</div>
-            )}
+            {statCards.map((card) => (
+              <div className={`stat-card stat-card-${card.tone}`} key={card.label}>
+                <span className="stat-card-icon">{card.icon}</span>
+                <div className="stat-card-copy">
+                  <span>{card.label}</span>
+                  <strong>{card.value}</strong>
+                  <small>{card.detail}</small>
+                </div>
+              </div>
+            ))}
           </div>
 
           <main className="map-section">
+            <div className="map-header">
+              <div className="map-header-title">
+                <MapPin size={16} />
+                <div>
+                  <h2>Live Map</h2>
+                  <p>{locations.length} tracked locations</p>
+                </div>
+              </div>
+              <span className={`map-alert-chip ${activeAlerts > 0 ? "map-alert-chip-warning" : ""}`}>
+                <span className="map-alert-dot" />
+                {activeAlerts > 0 ? `${activeAlerts} alerts` : "Clear"}
+              </span>
+            </div>
+            <div className="location-search" ref={searchRef}>
+              {!searchPanelOpen && (
+                <button
+                  className="map-search-toggle"
+                  aria-label="Search locations"
+                  onClick={() => {
+                    setSearchPanelOpen(true);
+                    setSearchOpen(true);
+                  }}
+                >
+                  <Search size={18} />
+                </button>
+              )}
+              {searchPanelOpen && (
+                <div className="map-search-panel">
+                  <div className="location-search-input-wrapper">
+                    <Search className="location-search-icon" size={17} />
+                    <input
+                      className="location-search-input"
+                      type="text"
+                      placeholder="Search locations..."
+                      value={searchQuery}
+                      onChange={(e) => { setSearchQuery(e.target.value); setSearchOpen(true); }}
+                      onFocus={() => setSearchOpen(true)}
+                      autoFocus
+                    />
+                    <button
+                      className="location-search-clear"
+                      aria-label={searchQuery ? "Clear search" : "Close search"}
+                      onClick={() => {
+                        if (searchQuery) {
+                          setSearchQuery("");
+                          setSearchOpen(false);
+                        } else {
+                          setSearchPanelOpen(false);
+                          setSearchOpen(false);
+                        }
+                      }}
+                    >
+                      <X size={15} />
+                    </button>
+                  </div>
+                  {searchOpen && filteredLocations.length > 0 && (
+                    <ul className="location-search-results">
+                      {filteredLocations.map(loc => (
+                        <li key={loc.id} className="location-search-item" onClick={() => handleSearchSelect(loc)}>
+                          <span className="lsi-dot" style={{ background: DENSITY_COLOR[loc.density] }} />
+                          <div className="lsi-info">
+                            <span className="lsi-name">{loc.name}</span>
+                            <span className="lsi-type">{loc.type}</span>
+                          </div>
+                          <span className="lsi-density" style={{ color: DENSITY_COLOR[loc.density] }}>
+                            {loc.density}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {searchOpen && searchQuery.trim() && filteredLocations.length === 0 && (
+                    <div className="location-search-empty">No locations found</div>
+                  )}
+                </div>
+              )}
+            </div>
             <MapContainer center={center} zoom={14} className="main-map">
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -612,15 +699,12 @@ export default function UserHomePage() {
                             {location.type}
                           </p>
                           <button
-                            className="save-link-btn"
+                            className={`save-link-btn ${favoriteIds.has(location.id) ? "active" : ""}`}
                             aria-label={favoriteIds.has(location.id) ? "Remove from favorites" : "Save to favorites"}
                             onClick={(e) => { e.stopPropagation(); handleBookmarkClick(location.id); }}
                           >
-                            <img
-                              src={favoriteIds.has(location.id) ? "/Favorites Selected.png" : "/Favorites.png"}
-                              alt=""
-                              style={{ width: 20, height: 20, objectFit: "contain" }}
-                            />
+                            <span className="save-star-icon">{favoriteIds.has(location.id) ? "★" : "☆"}</span>
+                            <span>{favoriteIds.has(location.id) ? "Saved" : "Save"}</span>
                           </button>
                         </div>
                         <div className="title-row">
@@ -629,7 +713,8 @@ export default function UserHomePage() {
                         <div className="status-row">
                           <div className="badge-wrapper">
                             <span className={`badge ${densityClasses[location.density]}`}>
-                              ● {location.density} Crowd Level
+                              <span className="status-dot" />
+                              {location.density} Crowd Level
                             </span>
                             <span className="updated-text">{location.lastUpdated}</span>
                           </div>
@@ -654,19 +739,27 @@ export default function UserHomePage() {
                             <button
                               className="input-btn"
                               style={{ flex: 1 }}
+                              type="button"
+                              disabled={savingFavoriteId === location.id}
                               onClick={(e) => {
+                                e.preventDefault();
                                 e.stopPropagation();
-                                confirmAddFavorite(location.id, pendingThreshold);
+                                keepViewInPlace(() => {
+                                  void confirmAddFavorite(location.id, pendingThreshold);
+                                });
                               }}
                             >
-                              Save to Favorites
+                              {savingFavoriteId === location.id ? "Saving..." : "Save to Favorites"}
                             </button>
                             <button
                               className="input-btn"
                               style={{ flex: 0, background: "#b2bec3", minWidth: 64 }}
+                              type="button"
+                              disabled={savingFavoriteId === location.id}
                               onClick={(e) => {
+                                e.preventDefault();
                                 e.stopPropagation();
-                                setPendingFavoriteId(null);
+                                keepViewInPlace(() => setPendingFavoriteId(null));
                               }}
                             >
                               Cancel
@@ -679,19 +772,32 @@ export default function UserHomePage() {
                         <>
                           <button
                             className="input-btn"
-                            onClick={(e) => { e.stopPropagation(); setIsReportModalOpen(true); }}
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              keepViewInPlace(() => {
+                                setSelectedLocation(location);
+                                setIsReportModalOpen(true);
+                              });
+                            }}
                           >
                             <span>+</span> Input Crowd Level
                           </button>
 
                           <button
                             className="reports-toggle-btn"
+                            type="button"
                             onClick={(e) => {
+                              e.preventDefault();
                               e.stopPropagation();
-                              setReportsOpenFor(prev => prev === location.id ? null : location.id);
+                              keepViewInPlace(() => {
+                                setReportsOpenFor(prev => prev === location.id ? null : location.id);
+                              });
                             }}
                           >
-                            {reportsOpenFor === location.id ? "▲ Hide reports" : "▼ View reports"}
+                            {reportsOpenFor === location.id ? <ChevronUp size={15} /> : <ChevronDown size={15} />}
+                            {reportsOpenFor === location.id ? "Hide reports" : "View reports"}
                           </button>
 
                           {reportsOpenFor === location.id && (
@@ -713,7 +819,7 @@ export default function UserHomePage() {
       {/* ── DASHBOARD TAB ── */}
       {activeTab === "dashboard" && <DashboardSection locations={locations} />}
 
-      <BottomNav />
+      <BottomNav onHomeClick={() => setActiveTab("home")} />
 
       <ReportModal
         isOpen={isReportModalOpen}

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rK7rP4GUo/4=",
+  "dgSpecHash": "A9gznWi7JUI=",
   "success": true,
-  "projectFilePath": "D:\\3rd Year UP - Comsci\\Crowdlens-129\\Crowdlens-Backend\\Crowdlens-backend.csproj",
+  "projectFilePath": "D:\\3rd Year UP - Comsci\\Crowdlens\\backend\\Crowdlens-backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Computer\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Computer\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

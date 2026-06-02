@@ -19,6 +19,7 @@ export default function ReportModal({ isOpen, onClose, locationName, onSubmit }:
           {Options.map((opt) => (
             <button 
               key={opt.level} 
+              type="button"
               className={`report-option-card ${opt.level.toLowerCase().replace(' ', '-')}`}
               onClick={() => onSubmit(opt.level)}
             >

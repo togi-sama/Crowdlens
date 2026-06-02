@@ -25,32 +25,41 @@
 }
 
 .save-link-btn {
-  /* Reset default button styles */
-  background-color: transparent;
-  border: none; /* Soft border */
-  padding: 4px 8px;
-  border-radius: 8px;
-    
-  /* Layout */
-  display: flex;
+  min-height: 34px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  padding: 0 10px;
+  border-radius: 999px;
+  display: inline-flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 6px;
   cursor: pointer;
+  color: #c2410c;
+  font-size: 12px;
+  font-weight: 800;
   transition: all 0.2s ease;
   width: fit-content;
-  margin-bottom: 8px; /* Space above the badge */
+  margin-bottom: 8px;
+  box-shadow: 0 8px 18px rgba(194, 65, 12, 0.12);
 }
 
 .save-link-btn:hover {
-  background-color: #f8fafc;
-  color: #30924C;
+  background: #ffedd5;
+  border-color: #fb923c;
+  transform: translateY(-1px);
 }
 
-/* Optional: Active/Saved State */
 .save-link-btn.active {
-  background: #f8fafc;
-  border-color: #30924C;
-  color: #30924C;
+  background: #eaf7ee;
+  border-color: rgba(48, 146, 76, 0.35);
+  color: #26763d;
+  box-shadow: 0 8px 18px rgba(48, 146, 76, 0.14);
+}
+
+.save-star-icon {
+  font-size: 16px;
+  line-height: 1;
 }
 
 .title-row {
@@ -208,6 +217,12 @@
 .input-btn:hover {
   background: #267a3e;
   transform: translateY(-2px);
+}
+
+.input-btn:disabled {
+  opacity: 0.72;
+  cursor: wait;
+  transform: none;
 }
 
 .reports-toggle-btn {

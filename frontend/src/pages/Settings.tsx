@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import BottomNav from "../components/BottomNav";
+import { Award, Moon, ShieldCheck, Sun, TrendingUp } from "lucide-react";
 import {
   getUserProfile,
   getUserSettings,
@@ -21,10 +22,32 @@ function karmaRank(pts: number): string {
   return "Elite Lens";
 }
 
+function nextKarmaGoal(pts: number): { label: string; current: number; target: number; progress: number } {
+  const goals = [
+    { min: 1, label: "Contributor" },
+    { min: 5, label: "Trusted Reporter" },
+    { min: 15, label: "Crowd Expert" },
+    { min: 30, label: "Senior Analyst" },
+    { min: 50, label: "Elite Lens" },
+  ];
+  const next = goals.find((goal) => pts < goal.min);
+  if (!next) return { label: "Top rank reached", current: 50, target: 50, progress: 100 };
+  const previous = [...goals].reverse().find((goal) => pts >= goal.min)?.min ?? 0;
+  const span = Math.max(1, next.min - previous);
+  const current = Math.max(0, pts - previous);
+  return {
+    label: next.label,
+    current,
+    target: span,
+    progress: Math.max(0, Math.min(100, (current / span) * 100)),
+  };
+}
+
 export default function Settings() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [activePanel, setActivePanel] = useState<string | null>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   // ── Remote state ────────────────────────────────────────────────────────────
   const [displayName,  setDisplayName]  = useState(user?.name  ?? "—");
@@ -38,6 +61,19 @@ export default function Settings() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [pendingLocation,  setPendingLocation]  = useState(true);
   const [pendingNotifications, setPendingNotifications] = useState(true);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("cl_theme") === "dark" ? "dark" : "light";
+    setTheme(savedTheme);
+    document.documentElement.dataset.theme = savedTheme;
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    localStorage.setItem("cl_theme", nextTheme);
+    document.documentElement.dataset.theme = nextTheme;
+  };
 
   // ── Load from API on mount ──────────────────────────────────────────────────
   useEffect(() => {
@@ -137,6 +173,7 @@ export default function Settings() {
   };
 
   const optionItems = [
+    { label: "Appearance",       icon: "theme" },
     { label: "Profile",          icon: "👤" },
     { label: "Location Sharing", icon: "📍" },
     { label: "Notifications",    icon: "🔔" },
@@ -145,6 +182,7 @@ export default function Settings() {
   ];
 
   const isAdmin = user?.role === "admin" || user?.role === "Admin";
+  const karmaGoal = nextKarmaGoal(karma);
 
   return (
     <div className="settings-page">
@@ -173,12 +211,44 @@ export default function Settings() {
       {/* CrowdLens Points */}
       <div className={`karma-card ${karma > 0 ? "karma-pos" : karma < 0 ? "karma-neg" : "karma-zero"}`}>
         <div className="karma-card-inner">
-          <p className="karma-eyebrow">★ &nbsp;CrowdLens Points&nbsp; ★</p>
-          <p className={`karma-score ${karma > 0 ? "pos" : karma < 0 ? "neg" : ""}`}>
-            {karma > 0 ? `+${karma}` : karma}
-          </p>
-          <span className="karma-rank-badge">{karmaRank(karma)}</span>
-          <p className="karma-desc">Votes on your reports earn or lose you points</p>
+          <div className="karma-top-row">
+            <div className="karma-title-wrap">
+              <span className="karma-icon">
+                <Award size={18} />
+              </span>
+              <div>
+                <p className="karma-eyebrow">CrowdLens Points</p>
+                <p className="karma-desc">Reputation from community votes</p>
+              </div>
+            </div>
+            <span className="karma-rank-badge">
+              <ShieldCheck size={12} />
+              {karmaRank(karma)}
+            </span>
+          </div>
+
+          <div className="karma-score-row">
+            <p className={`karma-score ${karma > 0 ? "pos" : karma < 0 ? "neg" : ""}`}>
+              {karma > 0 ? `+${karma}` : karma}
+            </p>
+            <div className="karma-score-copy">
+              <span>{karma >= 0 ? "Positive standing" : "Needs review"}</span>
+              <small>{karma >= 0 ? "Keep submitting accurate reports" : "Improve accuracy to recover points"}</small>
+            </div>
+          </div>
+
+          <div className="karma-progress-block">
+            <div className="karma-progress-label">
+              <span>
+                <TrendingUp size={12} />
+                Next: {karmaGoal.label}
+              </span>
+              <strong>{karmaGoal.current}/{karmaGoal.target}</strong>
+            </div>
+            <div className="karma-progress-track">
+              <span style={{ width: `${karmaGoal.progress}%` }} />
+            </div>
+          </div>
         </div>
       </div>
 
@@ -203,10 +273,19 @@ export default function Settings() {
             <li key={label} className="settings-option">
               <button
                 className="settings-action"
-                onClick={() => handleOptionClick(label)}
+                onClick={() => label === "Appearance" ? toggleTheme() : handleOptionClick(label)}
               >
-                <span className="settings-action-icon">{icon}</span>
+                <span className="settings-action-icon">
+                  {icon === "theme" ? (
+                    theme === "dark" ? <Moon size={19} /> : <Sun size={19} />
+                  ) : icon}
+                </span>
                 <span className="settings-action-label">{label}</span>
+                {label === "Appearance" && (
+                  <span className={`settings-status-badge ${theme === "dark" ? "theme-dark" : "on"}`}>
+                    {theme === "dark" ? "Dark" : "Light"}
+                  </span>
+                )}
                 {label === "Location Sharing" && (
                   <span className={`settings-status-badge ${locationEnabled ? "on" : "off"}`}>
                     {locationEnabled ? "On" : "Off"}
@@ -217,7 +296,7 @@ export default function Settings() {
                     {notificationsEnabled ? "On" : "Off"}
                   </span>
                 )}
-                <span className="settings-action-chevron">›</span>
+                <span className="settings-action-chevron">{label === "Appearance" ? "" : "›"}</span>
               </button>
 
               {isActivePanel && label === "Location Sharing" && (
@@ -227,7 +306,7 @@ export default function Settings() {
                       <label htmlFor="location-toggle" style={{ fontWeight: 600, display: "block" }}>
                         Location Sharing
                       </label>
-                      <p style={{ fontSize: 12, color: "#7a8f82", margin: "2px 0 0" }}>
+                      <p className="panel-helper-text">
                         Required for submitting reports and voting
                       </p>
                     </div>
@@ -255,7 +334,7 @@ export default function Settings() {
                       <label htmlFor="notif-toggle" style={{ fontWeight: 600, display: "block" }}>
                         Notifications
                       </label>
-                      <p style={{ fontSize: 12, color: "#7a8f82", margin: "2px 0 0" }}>
+                      <p className="panel-helper-text">
                         Receive alerts for your watched locations
                       </p>
                     </div>

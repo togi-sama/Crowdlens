@@ -6,6 +6,15 @@ import BottomNav from "../components/BottomNav";
 import ThresholdPicker, { type Threshold } from "../components/ThresholdPicker";
 import { toastSuccess, toastError } from "../components/Toast";
 import type { CrowdLocation } from "../types/crowd";
+import { Bell, Clock, MapPin, PlusCircle, Trash2 } from "lucide-react";
+
+const DENSITY_CLASS: Record<string, string> = {
+  "Very Low": "very-low",
+  Low: "low",
+  Medium: "medium",
+  High: "high",
+  "Very High": "very-high",
+};
 
 export default function Favorites() {
   const [favorites, setFavorites] = useState<CrowdLocation[]>([]);
@@ -83,7 +92,12 @@ export default function Favorites() {
 
   return (
     <div className="favorites-page">
-      <p className="page-label">Favorites</p>
+      <header className="favorites-header">
+        <div>
+          <h1 className="page-label">Favorites</h1>
+          <p className="favorites-subtitle">Saved locations and alert thresholds</p>
+        </div>
+      </header>
 
       <div className="favorites-list">
         {loading && <p className="empty-text">Loading favorites…</p>}
@@ -96,25 +110,47 @@ export default function Favorites() {
 
         {favorites.map((fav) => (
           <div key={fav.id} className="favorite-card">
-            <h3>{fav.name}</h3>
-            <p className="favorite-type">{fav.type}</p>
-            <p className="favorite-item">
-              Crowd Level: <strong>{fav.density}</strong>
-            </p>
-            <p className="favorite-item">Last updated: {fav.lastUpdated}</p>
+            <div className="favorite-card-header">
+              <div className="favorite-title-wrap">
+                <span className="favorite-location-icon">
+                  <MapPin size={17} />
+                </span>
+                <div>
+                  <h3>{fav.name}</h3>
+                  <p className="favorite-type">{fav.type}</p>
+                </div>
+              </div>
+              <span className={`favorite-density-badge ${DENSITY_CLASS[fav.density] ?? "medium"}`}>
+                {fav.density}
+              </span>
+            </div>
+
+            <div className="favorite-meta-grid">
+              <span className="favorite-item">
+                <Clock size={13} />
+                {fav.lastUpdated}
+              </span>
+              <span className="favorite-item">
+                <Bell size={13} />
+                Alert: {fav.alertThreshold ?? "Low"}
+              </span>
+            </div>
 
             {/* Per-location alert threshold */}
-            <ThresholdPicker
-              value={(fav.alertThreshold ?? "Low") as Threshold}
-              onChange={(v) => handleThresholdChange(fav.id, v)}
-              disabled={savingThresholdId === fav.id}
-            />
+            <div className="favorite-threshold-card">
+              <ThresholdPicker
+                value={(fav.alertThreshold ?? "Low") as Threshold}
+                onChange={(v) => handleThresholdChange(fav.id, v)}
+                disabled={savingThresholdId === fav.id}
+              />
+            </div>
 
             {deletingId === fav.id ? (
               <div className="delete-confirm">
                 <p className="delete-confirm-text">Remove &ldquo;{fav.name}&rdquo;?</p>
                 <div className="favorite-actions">
                   <button className="delete-btn" onClick={() => confirmDelete(fav.id)}>
+                    <Trash2 size={15} />
                     Yes, Remove
                   </button>
                   <button className="cancel-btn" onClick={() => setDeletingId(null)}>
@@ -125,9 +161,11 @@ export default function Favorites() {
             ) : (
               <div className="favorite-actions">
                 <button className="create-report-btn" onClick={() => openReportModal(fav)}>
+                  <PlusCircle size={15} />
                   Create Report
                 </button>
                 <button className="delete-btn" onClick={() => setDeletingId(fav.id)}>
+                  <Trash2 size={15} />
                   Delete
                 </button>
               </div>

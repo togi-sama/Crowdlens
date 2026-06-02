@@ -4709,11 +4709,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\3rd Year UP - Comsci\\Crowdlens-129\\Crowdlens-Backend\\Crowdlens-backend.csproj",
+      "projectUniqueName": "D:\\3rd Year UP - Comsci\\Crowdlens\\backend\\Crowdlens-backend.csproj",
       "projectName": "Crowdlens-backend",
-      "projectPath": "D:\\3rd Year UP - Comsci\\Crowdlens-129\\Crowdlens-Backend\\Crowdlens-backend.csproj",
+      "projectPath": "D:\\3rd Year UP - Comsci\\Crowdlens\\backend\\Crowdlens-backend.csproj",
       "packagesPath": "C:\\Users\\Computer\\.nuget\\packages\\",
-      "outputPath": "D:\\3rd Year UP - Comsci\\Crowdlens-129\\Crowdlens-Backend\\obj\\",
+      "outputPath": "D:\\3rd Year UP - Comsci\\Crowdlens\\backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Computer\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -4739,8 +4739,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "10.0.100"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -4806,7 +4805,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.418/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

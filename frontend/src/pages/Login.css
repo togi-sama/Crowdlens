@@ -3,9 +3,9 @@
   width: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(380px, 480px);
-  gap: 36px;
+  gap: 32px;
   align-items: center;
-  padding: 40px;
+  padding: 32px;
   box-sizing: border-box;
   font-family: "Inter", Arial, sans-serif;
   background:
@@ -314,7 +314,7 @@
   background: rgba(255, 255, 255, 0.96);
   border: 1px solid rgba(48, 146, 76, 0.14);
   border-radius: 8px;
-  padding: 42px;
+  padding: 38px;
   box-shadow:
     0 10px 28px rgba(17, 35, 25, 0.1),
     0 30px 70px rgba(17, 35, 25, 0.12);
@@ -325,7 +325,7 @@
 .logo-area {
   display: none;
   justify-content: center;
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 .logo {
@@ -337,7 +337,7 @@
 }
 
 .login-heading {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .title {
@@ -359,7 +359,7 @@
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px;
 }
 
 .field-group {
@@ -632,7 +632,7 @@
   .login-page {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 28px 18px;
   }
 
@@ -642,7 +642,8 @@
 
   .login-card {
     justify-self: auto;
-    padding: 36px 24px;
+    max-width: 430px;
+    padding: 32px 24px;
   }
 
   .logo-area {
@@ -669,15 +670,30 @@
 @media (max-width: 420px) {
   .login-page {
     align-items: flex-start;
-    padding: 18px 14px;
+    padding: 16px 12px;
   }
 
   .login-card {
-    padding: 30px 20px;
+    padding: 28px 18px;
+    box-shadow:
+      0 8px 20px rgba(17, 35, 25, 0.08),
+      0 18px 44px rgba(17, 35, 25, 0.1);
   }
 
   .title {
-    font-size: 24px;
+    font-size: 23px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .logo {
+    width: 46px;
+  }
+
+  .logo-text {
+    width: 142px;
   }
 }
 
