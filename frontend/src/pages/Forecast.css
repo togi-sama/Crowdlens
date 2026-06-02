@@ -1,0 +1,475 @@
+/* =========================================================
+   Forecast page — CrowdLens
+   ========================================================= */
+
+.forecast-page {
+  background: #f4f6f8;
+  min-height: 100vh;
+  padding-bottom: 40px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Header ── */
+.fc-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  background: white;
+  border-bottom: 1px solid #eee;
+  padding: 12px 16px;
+  gap: 8px;
+}
+
+.fc-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid #e0e0e0;
+  background: none;
+  cursor: pointer;
+  color: #1b1b1b;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.fc-back-btn:hover { background: #f5f5f5; }
+
+.fc-header-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.fc-header-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1b1b1b;
+  line-height: 1.2;
+}
+
+.fc-header-sub {
+  font-size: 11px;
+  color: #999;
+}
+
+.fc-header-spacer { width: 36px; flex-shrink: 0; }
+
+/* ── Shared card shell ── */
+.fc-card {
+  margin: 16px;
+  background: white;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+}
+
+/* ── Controls ── */
+.fc-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.fc-field {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fc-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+/* Select with custom arrow */
+.fc-select-wrap {
+  position: relative;
+}
+
+.fc-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding: 10px 34px 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e0e0e0;
+  background: #fafafa;
+  font-size: 14px;
+  color: #1b1b1b;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.fc-select:focus { outline: none; border-color: #30924C; }
+
+.fc-select-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Time-period pills */
+.fc-pills {
+  display: flex;
+  gap: 6px;
+}
+
+.fc-pill {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 10px;
+  border: 1.5px solid #e0e0e0;
+  background: #fafafa;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.fc-pill:hover { border-color: #30924C; }
+
+.fc-pill-active {
+  background: #30924C;
+  border-color: #30924C;
+  color: white;
+}
+
+/* ── Get Forecast button ── */
+.fc-btn {
+  width: 100%;
+  padding: 13px;
+  border-radius: 12px;
+  border: none;
+  background: #30924C;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.fc-btn:not(:disabled):hover  { background: #25753d; }
+.fc-btn:not(:disabled):active { transform: scale(0.98); }
+
+.fc-btn:disabled {
+  background: #a5d6b0;
+  cursor: not-allowed;
+}
+
+.fc-error {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #c62828;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+/* ── Empty state ── */
+.fc-empty {
+  text-align: center;
+  padding: 40px 24px 20px;
+  color: #888;
+}
+
+.fc-empty-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #e8f5e9;
+  margin-bottom: 14px;
+}
+
+.fc-empty-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 6px;
+}
+
+.fc-empty-desc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Loading skeleton ── */
+.fc-slots {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.fc-slot {
+  flex: 1;
+  min-width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 12px 6px 10px;
+  border-radius: 12px;
+  border: 1.5px solid transparent;
+}
+
+.fc-slot-hour {
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.fc-slot-score {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.fc-slot-level {
+  font-size: 9px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* Confidence bar */
+.fc-slot-conf-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  width: 100%;
+  margin-top: 3px;
+}
+
+.fc-slot-conf-bar {
+  width: 80%;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.fc-slot-conf-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.fc-slot-conf {
+  font-size: 9px;
+  color: #888;
+}
+
+/* Skeleton animation */
+.fc-slot-skeleton {
+  height: 104px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+  border: none;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.fc-skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+}
+
+.fc-skeleton-select { height: 42px; }
+
+/* ── Forecast unavailable ── */
+.fc-unavailable {
+  text-align: center;
+  padding: 32px 16px;
+  color: #555;
+}
+
+.fc-unavailable-icon {
+  font-size: 28px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.fc-unavailable-sub {
+  font-size: 12px;
+  color: #999;
+  margin: 4px 0 0;
+}
+
+/* ── Results card ── */
+.fc-results { padding: 20px; }
+
+.fc-model-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.fc-location-label {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+}
+
+.fc-model-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.fc-badge-lstm { background: #e8eaf6; color: #3949ab; border: 1px solid #9fa8da; }
+.fc-badge-stat { background: #e0f2f1; color: #00695c; border: 1px solid #80cbc4; }
+
+/* ── Summary card ── */
+.fc-summary {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: #f9fafb;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.fc-summary-item {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.fc-summary-divider {
+  width: 1px;
+  background: #e8e8e8;
+  margin: 10px 0;
+}
+
+.fc-summary-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.fc-summary-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.fc-summary-val {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ── Section labels ── */
+.fc-section-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 10px;
+}
+
+/* ── Chart wrapper ── */
+.fc-chart-wrapper {
+  margin: 4px 0 16px;
+}
+
+/* ── High congestion alert ── */
+.fc-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff3e0;
+  border: 1.5px solid #e65100;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e65100;
+  margin-bottom: 12px;
+}
+
+/* ── Alternative suggestion ── */
+.fc-alternative { margin-bottom: 14px; }
+
+.fc-alt-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid;
+  cursor: default;
+}
+
+.fc-alt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.fc-alt-name  { font-size: 13px; font-weight: 700; color: #1b1b1b; }
+.fc-alt-level { font-size: 12px; font-weight: 600; }
+
+/* ── Disclaimers ── */
+.fc-disclaimer {
+  font-size: 11px;
+  color: #aaa;
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+.fc-disclaimer-warn { color: #e65100; font-weight: 500; }

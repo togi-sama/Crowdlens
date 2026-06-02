@@ -1,0 +1,104 @@
+.manage-locations-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url('/Image2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Inter', sans-serif;
+  color: #2d3436;
+}
+
+.page-label {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.add-button {
+    padding: 10px 20px;
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.remove-button {
+    padding: 10px 20px;
+    background-color: #d63031;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.update-button {
+    padding: 10px 20px;
+    background-color: #00b894;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.bottom-nav {
+  z-index: 1000; /* Ensures it stays above the map */
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;  /* Adds consistent spacing between icon and text */
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-icon {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+}
+
+.nav-item,
+.nav-item:link,
+.nav-item:visited,
+.nav-item:hover,
+.nav-item:active {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-item {
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.nav-text {
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}

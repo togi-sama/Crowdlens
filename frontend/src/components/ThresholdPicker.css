@@ -1,0 +1,48 @@
+.threshold-picker {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.threshold-label {
+  font-size: 11px;
+  color: #636e72;
+  font-weight: 600;
+  margin: 0 0 7px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.threshold-options {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.threshold-btn {
+  flex: 1;
+  min-width: 52px;
+  padding: 5px 4px;
+  border-radius: 20px;
+  border: 1.5px solid;
+  background: white;
+  font-size: 11px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.threshold-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.threshold-btn-active {
+  color: white !important;
+}
+
+.threshold-btn:not(.threshold-btn-active):hover {
+  opacity: 0.8;
+}

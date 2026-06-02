@@ -1,0 +1,130 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Dim the map background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* CRITICAL: Must be higher than Leaflet (which is ~1000) */
+  z-index: 1500; 
+}
+
+.close-x {
+    position:absolute;
+    top: 15px;      /* Distance from the top */
+    right: 15px;    /* Distance from the right */
+    
+    /* Reset button styles */
+    background: #f1f5f9; /* Light grey circle background */
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Makes it a circle */
+    
+    /* Typography & Alignment */
+    font-size: 20px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.close-x:hover {
+  background: #e2e8f0;
+  color: #1e293b;
+  transform: rotate(90deg); /* Subtle professional animation */
+}
+
+.report-modal {
+  background: white;
+  width: 90%;
+  max-width: 400px;
+  border-radius: 24px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  animation: slideUp 0.7s ease-out;
+
+  z-index: 10000;
+}
+
+.report-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.report-header h3 { margin: 0; font-size: 18px; color: #333; }
+.report-header p { margin: 4px 0 0; font-size: 14px; color: #30924C; font-weight: 600; }
+
+.report-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.report-option-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  background: #f8fafc;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.report-option-card:hover {
+  transform: translateX(5px);
+  border-color: #30924C;
+  background: #f0fdf4;
+}
+
+.option-info { display: flex; flex-direction: column; }
+.option-level { font-weight: 700; font-size: 15px; color: #1e293b; }
+.option-desc { font-size: 12px; color: #64748b; margin-top: 2px; }
+
+.chevron { color: #cbd5e1; font-weight: bold; }
+
+/* Dynamic Colors for levels */
+/* Very High - Red */
+.very-high:hover {
+  background-color: #fef2f2; /* Light red bg */
+  border-color: #ef4444;
+}
+.very-high:hover .option-level { color: #dc2626; }
+
+/* High - Orange/Red */
+.high:hover {
+  background-color: #fff7ed; /* Light orange bg */
+  border-color: #ea580c;
+}
+.high:hover .option-level { color: #ea580c; }
+
+/* Medium - Amber */
+.medium:hover {
+  background-color: #fffbeb; /* Light amber bg */
+  border-color: #f59e0b;
+}
+.medium:hover .option-level { color: #d97706; }
+
+/* Low - Light Green */
+.low:hover {
+  background-color: #f0fdf4; /* Light lime bg */
+  border-color: #22c55e;
+}
+.low:hover .option-level { color: #16a34a; }
+
+/* Very Low - Success Green */
+.very-low:hover {
+  background-color: #f3fff3; /* Light emerald bg */
+  border-color: #80e78f; 
+}
+.very-low:hover .option-level { color: #73bd5e; }

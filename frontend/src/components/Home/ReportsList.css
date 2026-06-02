@@ -1,0 +1,255 @@
+.rl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  margin-top: 4px;
+  padding-right: 2px;
+}
+
+.rl-list::-webkit-scrollbar {
+  width: 4px;
+}
+.rl-list::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 4px;
+}
+
+.rl-card {
+  background: #f8fafc;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.rl-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rl-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.rl-meta {
+  font-size: 11px;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.rl-remark {
+  margin: 6px 0 4px;
+  font-size: 12px;
+  color: #475569;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.rl-votes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.rl-vote-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: #cbd5e1;
+  padding: 2px 5px;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.rl-vote-btn:hover {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.rl-vote-btn.up.active {
+  color: #30924C;
+}
+
+.rl-vote-btn.down.active {
+  color: #e17055;
+}
+
+.rl-karma {
+  font-size: 12px;
+  font-weight: 700;
+  color: #94a3b8;
+  min-width: 20px;
+  text-align: center;
+}
+
+.rl-karma.pos { color: #30924C; }
+.rl-karma.neg { color: #e17055; }
+
+.rl-empty {
+  font-size: 12px;
+  color: #94a3b8;
+  text-align: center;
+  margin: 8px 0 4px;
+}
+
+/* ── Clickable reporter name ── */
+.rl-reporter-name {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 11px;
+  font-family: inherit;
+  color: #30924C;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline dotted #30924C60;
+  text-underline-offset: 2px;
+  transition: opacity 0.15s;
+}
+
+.rl-reporter-name:hover {
+  opacity: 0.75;
+}
+
+/* ── Reporter profile popup ── */
+.rp-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 2000;
+  padding-bottom: 80px; /* clear bottom nav */
+  animation: rp-fade-in 0.15s ease;
+}
+
+@keyframes rp-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.rp-card {
+  background: #ffffff;
+  border-radius: 20px 20px 16px 16px;
+  width: min(360px, 92vw);
+  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.18);
+  animation: rp-slide-up 0.2s ease;
+  overflow: hidden;
+}
+
+@keyframes rp-slide-up {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.rp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.rp-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a2e22;
+}
+
+.rp-close {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 12px;
+  color: #64748b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+
+.rp-close:hover { background: #e2e8f0; }
+
+.rp-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 24px 24px;
+  gap: 4px;
+}
+
+.rp-avatar {
+  font-size: 32px;
+  color: #30924C;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.rp-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a2e22;
+  margin: 0;
+  text-align: center;
+}
+
+.rp-loading {
+  font-size: 13px;
+  color: #94a3b8;
+  margin: 12px 0 0;
+}
+
+.rp-score {
+  font-family: 'Sora', sans-serif;
+  font-size: 44px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1px;
+  color: #64748b;
+  margin: 10px 0 4px;
+}
+
+.rp-score.pos { color: #1e6635; }
+.rp-score.neg { color: #c0392b; }
+
+.rp-rank {
+  display: inline-block;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: rgba(48, 146, 76, 0.1);
+  color: #1e6635;
+  border: 1px solid rgba(48, 146, 76, 0.25);
+}
+
+.rp-rank.neg {
+  background: rgba(192, 57, 43, 0.08);
+  color: #c0392b;
+  border-color: rgba(192, 57, 43, 0.22);
+}
+
+.rp-label {
+  font-size: 11px;
+  color: #94a3b8;
+  margin: 6px 0 0;
+  letter-spacing: 0.03em;
+}

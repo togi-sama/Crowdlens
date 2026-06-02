@@ -1,0 +1,156 @@
+.favorites-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url('/Image2.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: 'Inter', sans-serif;
+  color: #2d3436;
+}
+
+.page-label {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+
+.favorites-list {
+  width: min(100%, 900px);
+  margin: 20px auto 90px;
+  display: grid;
+  gap: 12px;
+  padding: 0 15px;
+}
+
+.favorite-card {
+  border: 1px solid rgba(48, 146, 76, 0.25);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 12px 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+}
+
+.favorite-actions {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.create-report-btn,
+.delete-btn {
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.2s ease;
+}
+
+.create-report-btn {
+  background: #2a9d46;
+}
+
+.create-report-btn:hover,
+.delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.delete-btn {
+  background: #d64545;
+}
+
+.error-message {
+  color: #d60000;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.report-btn {
+  background: #2a9d46;
+}
+
+.report-btn:disabled {
+  background: #a2d8ae;
+  cursor: not-allowed;
+}
+
+.report-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.delete-btn {
+  background: #d64545;
+}
+
+.delete-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.error-message {
+  color: #d60000;
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.favorite-card h3 {
+  font-size: 1.1rem;
+  margin: 0 0 6px;
+  color: #1f4d2f;
+}
+
+.favorite-type {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 4px 0;
+  color: #30924c;
+}
+
+.favorite-item {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #525f68;
+}
+
+.empty-text {
+  text-align: center;
+  color: #636e72;
+  padding: 20px 0;
+  font-style: italic;
+}
+
+.cancel-btn {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  color: #636e72;
+  font-weight: 600;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.cancel-btn:hover {
+  background: #f5f5f5;
+}
+
+.delete-confirm {
+  margin-top: 12px;
+}
+
+.delete-confirm-text {
+  font-size: 0.85rem;
+  color: #636e72;
+  margin: 0 0 8px;
+}

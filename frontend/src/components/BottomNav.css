@@ -1,0 +1,54 @@
+.bottom-nav {
+  z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  flex: 1;
+}
+
+.nav-icon {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+}
+
+.nav-item,
+.nav-item:link,
+.nav-item:visited,
+.nav-item:hover,
+.nav-item:active {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-text {
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+  color: #b2bec3;
+  font-family: 'Inter', sans-serif;
+}
+
+.nav-text-active {
+  color: #30924C;
+}

@@ -1,0 +1,17 @@
+#root {
+  min-height: 100vh;
+  width: 100%;
+  /* Replace with your actual filename */
+  background-image: url('/Image2.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Keeps background still while scrolling */
+  background-repeat: no-repeat;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

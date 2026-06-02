@@ -1,0 +1,231 @@
+/* Container Override */
+.custom-popup .leaflet-popup-content-wrapper {
+  background: #ffffff;
+  color: #333;
+  border-radius: 16px;
+  padding: 0;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  overflow: hidden;
+  width: 250px;
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 0;
+  width: 100% !important;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+}
+
+/* Header Area */
+.popup-container {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.save-link-btn {
+  /* Reset default button styles */
+  background-color: transparent;
+  border: none; /* Soft border */
+  padding: 4px 8px;
+  border-radius: 8px;
+    
+  /* Layout */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
+  margin-bottom: 8px; /* Space above the badge */
+}
+
+.save-link-btn:hover {
+  background-color: #f8fafc;
+  color: #30924C;
+}
+
+/* Optional: Active/Saved State */
+.save-link-btn.active {
+  background: #f8fafc;
+  border-color: #30924C;
+  color: #30924C;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.star-icon {
+  font-size: 28px;
+  color: #30924C;
+}
+
+.title-row h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Status Badge & Meta */
+.status-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 15px;
+}
+
+.badge-wrapper {
+  display: flex;
+  align-items: center; /* Vertically centers the text with the badge */
+  gap: 10px;           /* Space between badge and text */
+  flex-wrap: wrap;     /* Ensures it doesn't break on very small screens */
+}
+
+.secondary-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.action-chip {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: white;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.action-chip:hover {
+  background: #f8fafc;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 45px; /* Positioned to the left of the 'X' button */
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #cbd5e1; /* Light grey when inactive */
+  transition: transform 0.2s, color 0.2s;
+  padding: 5px;
+}
+
+.favorite-btn.active {
+  color: #30924C; /* Your brand green */
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.badge.very-high { background: #fee2e2; color: #711111; }
+.badge.high { background: #fee2e2; color: #dc2626; }
+.badge.moderate { background: #fef3c7; color: #d97706; }
+.badge.low { background: #dcfce7; color: #16a34a; }
+.badge.very-low { background: #f0f9ff; color: #72ed72; }
+
+.updated-text {
+  font-size: 8px;
+  color: #94a3b8;
+  font-weight: 500;
+  margin-left: 10px;
+}
+
+/* Content Sections */
+.quieter-nearby {
+  font-size: 12px;
+  color: #059669;
+  background: #ecfdf5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+.congestion-info {
+  border-top: 1px solid #f1f5f9;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+
+.congestion-info h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.congestion-info p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* Action Button */
+.input-btn {
+  width: 100%;
+  background: #30924C;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  margin-top: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.input-btn:hover {
+  background: #267a3e;
+  transform: translateY(-2px);
+}
+
+.reports-toggle-btn {
+  width: 100%;
+  background: none;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 7px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.15s ease;
+}
+
+.reports-toggle-btn:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #1e293b;
+}

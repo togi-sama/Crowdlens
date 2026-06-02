@@ -1,0 +1,593 @@
+/* Settings.css */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --green: #30924C;
+  --green-light: #e8f5ed;
+  --green-mid: #c3e6ce;
+  --text-dark: #1a2e22;
+  --text-muted: #7a8f82;
+  --white: #ffffff;
+  --border: #e2ede6;
+  --shadow-sm: 0 2px 8px rgba(48, 146, 76, 0.08);
+  --shadow-md: 0 8px 24px rgba(48, 146, 76, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: url('/Image2.png') no-repeat center center / cover;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-dark);
+  padding-bottom: 90px;
+}
+
+/* ── Header ── */
+.settings-header {
+  padding: 48px 24px 0;
+  text-align: left;
+}
+
+.settings-header-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--green);
+  margin: 0 0 2px;
+}
+
+.settings-header-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* ── Profile Card ── */
+.profile-card {
+  margin: 24px 20px 0;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+}
+
+.profile-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-picture {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 540px;
+  object-fit: cover;
+  border: 3px solid var(--green-mid);
+}
+
+.profile-avatar-badge {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
+  background: var(--green);
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: var(--text-dark);
+}
+
+.profile-email {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0 0 8px;
+}
+
+.profile-bio {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.profile-edit-btn {
+  flex-shrink: 0;
+  background: var(--green-light);
+  border: none;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green);
+  cursor: pointer;
+  transition: background 0.18s;
+}
+
+.profile-edit-btn:hover {
+  background: var(--green-mid);
+}
+
+/* ── Section Label ── */
+.settings-section-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 20px 24px 8px;
+}
+
+/* ── Options List ── */
+.settings-options {
+  list-style: none;
+  margin: 0 20px;
+  padding: 0;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  overflow: visible;
+}
+
+.settings-option {
+  position: relative;
+}
+
+.settings-option:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.settings-option:first-child .settings-action {
+  border-radius: 16px 16px 0 0;
+}
+
+.settings-option:last-child .settings-action {
+  border-radius: 0 0 16px 16px;
+}
+
+.settings-option:only-child .settings-action {
+  border-radius: 16px;
+}
+
+.settings-action {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 16px 20px;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s;
+}
+
+.settings-action:hover {
+  background: var(--green-light);
+}
+
+.settings-action-icon {
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.settings-action-label {
+  flex: 1;
+}
+
+.settings-action-chevron {
+  color: var(--text-muted);
+  font-size: 16px;
+}
+
+/* Logout styling */
+.settings-option.logout-option .settings-action {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+.settings-option.logout-option .settings-action:hover {
+  background: #fff5f5;
+}
+
+/* Admin button */
+.admin-section {
+  margin: 0 20px;
+}
+
+.admin-btn {
+  width: 100%;
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-family: 'Sora', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(48, 146, 76, 0.3);
+  transition: opacity 0.18s, transform 0.18s;
+}
+
+.admin-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* ── Slide-down Panel ── */
+.settings-panel {
+  margin: 0 20px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  box-shadow: var(--shadow-md);
+  z-index: 15;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.settings-panel fieldset {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin: 0 0 12px;
+}
+
+.settings-panel legend {
+  font-family: 'Sora', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-dark);
+  padding: 0 4px;
+}
+
+.settings-panel fieldset label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.settings-panel fieldset label input {
+  accent-color: var(--green);
+  width: 16px;
+  height: 16px;
+}
+
+.panel-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.toggle-button {
+  min-width: 68px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #dfe6e9;
+  color: #636e72;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.toggle-button.enabled {
+  background: var(--green);
+  color: white;
+}
+
+.panel-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.panel-actions button {
+  padding: 8px 18px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #f8faf9;
+  transition: background 0.15s;
+}
+
+.panel-actions button:first-child {
+  background: var(--green);
+  color: white;
+  border-color: var(--green);
+}
+
+.panel-actions button:first-child:hover {
+  opacity: 0.9;
+}
+
+.panel-actions button:last-child:hover {
+  background: #eee;
+}
+
+/* ── Bottom Nav ── */
+.bottom-nav {
+  z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.nav-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nav-icon {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+}
+
+.nav-item,
+.nav-item:link,
+.nav-item:visited,
+.nav-item:hover,
+.nav-item:active {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-text {
+  font-size: 12px;
+  margin: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.settings-action-logout {
+  color: #dc2626 !important;
+  border-color: #fca5a5 !important;
+}
+
+.settings-action-logout:hover {
+  background: #fef2f2 !important;
+}
+
+.profile-picture {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #e8f5ec;
+}
+
+/* ── Karma Hero Card ── */
+.karma-card {
+  margin: 16px 20px 0;
+  border-radius: 22px;
+  padding: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* default (zero) gradient border — brand green */
+.karma-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  background: linear-gradient(135deg, #30924C 0%, #27ae60 55%, #52be80 100%);
+  z-index: 0;
+}
+
+/* positive — richer, deeper green */
+.karma-card.karma-pos::before {
+  background: linear-gradient(135deg, #1e6635 0%, #30924C 55%, #27ae60 100%);
+}
+
+/* negative — red */
+.karma-card.karma-neg::before {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 60%, #f1948a 100%);
+}
+
+.karma-card-inner {
+  position: relative;
+  z-index: 1;
+  border-radius: 20px;
+  padding: 28px 20px 22px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* zero — very light green wash */
+.karma-card.karma-zero .karma-card-inner {
+  background: linear-gradient(160deg, #f0fdf4 0%, #e8f5ed 100%);
+}
+
+/* positive — slightly more saturated green */
+.karma-card.karma-pos .karma-card-inner {
+  background: linear-gradient(160deg, #e8f5ed 0%, #d4edda 100%);
+}
+
+/* negative */
+.karma-card.karma-neg .karma-card-inner {
+  background: linear-gradient(160deg, #fff5f5 0%, #fee2e2 100%);
+}
+
+.karma-eyebrow {
+  font-family: 'Sora', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1e6635;
+  margin: 0;
+}
+
+.karma-card.karma-neg .karma-eyebrow { color: #9b1c1c; }
+
+.karma-score {
+  font-family: 'Sora', sans-serif;
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: #30924C;
+  margin: 4px 0 2px;
+  text-shadow: 0 4px 20px rgba(48, 146, 76, 0.18);
+}
+
+.karma-score.pos {
+  color: #1e6635;
+  text-shadow: 0 4px 20px rgba(30, 102, 53, 0.25);
+}
+
+.karma-score.neg {
+  color: #c0392b;
+  text-shadow: 0 4px 20px rgba(192, 57, 43, 0.2);
+}
+
+.karma-rank-badge {
+  display: inline-block;
+  font-family: 'Sora', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 14px;
+  border-radius: 999px;
+  background: rgba(48, 146, 76, 0.12);
+  color: #1e6635;
+  border: 1px solid rgba(48, 146, 76, 0.3);
+}
+
+.karma-card.karma-pos .karma-rank-badge {
+  background: rgba(30, 102, 53, 0.14);
+  color: #1e6635;
+  border-color: rgba(30, 102, 53, 0.32);
+}
+
+.karma-card.karma-neg .karma-rank-badge {
+  background: rgba(231, 76, 60, 0.1);
+  color: #c0392b;
+  border-color: rgba(231, 76, 60, 0.28);
+}
+
+.karma-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 4px 0 0;
+}
+
+/* ── Karma Badge (profile card) ── */
+.karma-badge {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: #f4faf6;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.karma-badge.pos {
+  background: var(--green-light);
+  color: var(--green);
+  border-color: var(--green-mid);
+}
+
+.karma-badge.neg {
+  background: #fff5f5;
+  color: #e74c3c;
+  border-color: #f5c6c2;
+}
+
+/* ── Settings status badge (On / Off / All etc.) ── */
+.settings-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  margin-right: 8px;
+  border: 1px solid var(--border);
+  background: #f0f4f2;
+  color: var(--text-muted);
+}
+
+.settings-status-badge.on {
+  background: var(--green-light);
+  color: var(--green);
+  border-color: var(--green-mid);
+}
+
+.settings-status-badge.off {
+  background: #fff5f5;
+  color: #e74c3c;
+  border-color: #f5c6c2;
+}
