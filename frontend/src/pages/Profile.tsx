@@ -1,7 +1,19 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CalendarDays, Camera, Check, ChevronLeft, Mail, MapPin, UserRound } from "lucide-react";
-import { getUserProfile, updateUserProfile, type UserProfile } from "../api/userService";
+import {
+  CalendarDays,
+  Camera,
+  Check,
+  ChevronLeft,
+  Mail,
+  MapPin,
+  UserRound,
+} from "lucide-react";
+import {
+  getUserProfile,
+  updateUserProfile,
+  type UserProfile,
+} from "../api/userService";
 import "./Profile.css";
 
 const PRONOUNS_OPTIONS = [
@@ -49,7 +61,7 @@ export default function Profile() {
   const handleChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
+    >,
   ) => {
     const { name, value } = e.target;
     setDraft((prev) => ({ ...prev, [name]: value }));
@@ -104,7 +116,13 @@ export default function Profile() {
           <h1 className="profile-topbar-title">Edit Profile</h1>
           <div style={{ width: 60 }} />
         </div>
-        <p style={{ textAlign: "center", padding: "40px 20px", color: "#7a8f82" }}>
+        <p
+          style={{
+            textAlign: "center",
+            padding: "40px 20px",
+            color: "#7a8f82",
+          }}
+        >
           Loading profile…
         </p>
       </div>
@@ -127,7 +145,11 @@ export default function Profile() {
       <div className="avatar-section">
         <div className="avatar-ring">
           <img src={avatarSrc} alt="Profile" className="avatar-img" />
-          <button className="avatar-edit-btn" onClick={handleAvatarClick} aria-label="Change profile photo">
+          <button
+            className="avatar-edit-btn"
+            onClick={handleAvatarClick}
+            aria-label="Change profile photo"
+          >
             <Camera size={15} />
           </button>
         </div>
@@ -144,7 +166,14 @@ export default function Profile() {
       {/* Form */}
       <div className="profile-form">
         {error && (
-          <p style={{ color: "#e74c3c", fontSize: 13, textAlign: "center", margin: "0 0 8px" }}>
+          <p
+            style={{
+              color: "#e74c3c",
+              fontSize: 13,
+              textAlign: "center",
+              margin: "0 0 8px",
+            }}
+          >
             {error}
           </p>
         )}
@@ -177,7 +206,9 @@ export default function Profile() {
               onChange={handleChange}
             >
               {PRONOUNS_OPTIONS.map((p) => (
-                <option key={p} value={p}>{p}</option>
+                <option key={p} value={p}>
+                  {p}
+                </option>
               ))}
             </select>
           </div>
@@ -259,12 +290,16 @@ export default function Profile() {
             onClick={handleSave}
             disabled={!isDirty || saving}
           >
-            {saving ? "Saving..." : saved ? (
+            {saving ? (
+              "Saving..."
+            ) : saved ? (
               <>
                 <Check size={17} />
                 Saved
               </>
-            ) : "Save Changes"}
+            ) : (
+              "Save Changes"
+            )}
           </button>
           <button
             className="discard-btn profile-action-btn"

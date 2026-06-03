@@ -26,7 +26,15 @@ export default function ThresholdPicker({ value, onChange, disabled }: Props) {
             disabled={disabled}
             className={`threshold-btn ${value === opt.value ? "threshold-btn-active" : ""}`}
             style={value === opt.value ? { background: opt.color, borderColor: opt.color } : { borderColor: opt.color, color: opt.color }}
-            onClick={() => onChange(opt.value)}
+            onMouseDown={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              onChange(opt.value);
+            }}
             type="button"
           >
             {opt.label}

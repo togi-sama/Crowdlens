@@ -153,10 +153,15 @@ html[data-theme="dark"] .field-label,
 html[data-theme="dark"] .profile-name,
 html[data-theme="dark"] .reg-field label,
 html[data-theme="dark"] .floating-card strong,
+html[data-theme="dark"] .lsi-name,
 html[data-theme="dark"] .activity-location,
 html[data-theme="dark"] .dashboard-card-title h3,
 html[data-theme="dark"] .analytics-value {
   color: var(--cl-text);
+}
+
+html[data-theme="dark"] .lsi-type {
+  color: var(--cl-muted);
 }
 
 html[data-theme="dark"] .settings-action:hover,

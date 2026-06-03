@@ -418,11 +418,19 @@ export default function UserHomePage() {
     setIsConfirmOpen(true);
   };
 
-  const keepViewInPlace = (action: () => void) => {
+  const keepViewInPlace = (action: () => void | Promise<void>) => {
     const scrollX = window.scrollX;
     const scrollY = window.scrollY;
-    action();
-    requestAnimationFrame(() => window.scrollTo(scrollX, scrollY));
+    const restore = () => window.scrollTo(scrollX, scrollY);
+    const result = action();
+    requestAnimationFrame(restore);
+    window.setTimeout(restore, 0);
+    window.setTimeout(restore, 120);
+    window.setTimeout(restore, 300);
+    window.setTimeout(restore, 600);
+    if (result && typeof (result as Promise<void>).finally === "function") {
+      (result as Promise<void>).finally(() => requestAnimationFrame(restore));
+    }
   };
 
   // Clicking the bookmark on an already-favorited location removes it immediately.
@@ -692,7 +700,16 @@ export default function UserHomePage() {
                   eventHandlers={{ click: () => setSelectedLocation(location) }}
                 >
                   <Popup className="custom-popup" maxWidth={popupWidth}>
-                    <div className="popup-container">
+                    <div
+                      className="popup-container"
+                      onClick={(e) => e.stopPropagation()}
+                      onMouseDown={(e) => {
+                        if ((e.target as HTMLElement).closest("button")) {
+                          e.preventDefault();
+                          e.stopPropagation();
+                        }
+                      }}
+                    >
                       <div className="popup-header">
                         <div className="badge-wrapper">
                           <p style={{ fontSize: "12px", color: "#30924C", fontWeight: "bold", margin: "0 0 4px 0", textTransform: "uppercase" }}>
@@ -701,7 +718,12 @@ export default function UserHomePage() {
                           <button
                             className={`save-link-btn ${favoriteIds.has(location.id) ? "active" : ""}`}
                             aria-label={favoriteIds.has(location.id) ? "Remove from favorites" : "Save to favorites"}
-                            onClick={(e) => { e.stopPropagation(); handleBookmarkClick(location.id); }}
+                            type="button"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              keepViewInPlace(() => handleBookmarkClick(location.id));
+                            }}
                           >
                             <span className="save-star-icon">{favoriteIds.has(location.id) ? "★" : "☆"}</span>
                             <span>{favoriteIds.has(location.id) ? "Saved" : "Save"}</span>
@@ -733,7 +755,7 @@ export default function UserHomePage() {
                         <div onClick={(e) => e.stopPropagation()}>
                           <ThresholdPicker
                             value={pendingThreshold}
-                            onChange={setPendingThreshold}
+                            onChange={(threshold) => keepViewInPlace(() => setPendingThreshold(threshold))}
                           />
                           <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
                             <button
@@ -744,9 +766,7 @@ export default function UserHomePage() {
                               onClick={(e) => {
                                 e.preventDefault();
                                 e.stopPropagation();
-                                keepViewInPlace(() => {
-                                  void confirmAddFavorite(location.id, pendingThreshold);
-                                });
+                                keepViewInPlace(() => confirmAddFavorite(location.id, pendingThreshold));
                               }}
                             >
                               {savingFavoriteId === location.id ? "Saving..." : "Save to Favorites"}

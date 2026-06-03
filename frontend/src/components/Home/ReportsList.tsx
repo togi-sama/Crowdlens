@@ -62,6 +62,21 @@ export default function ReportsList({ locationId }: Props) {
   const [votingId, setVotingId] = useState<number | null>(null);
   const [profile, setProfile] = useState<ReporterProfile | null>(null);
 
+  const keepViewInPlace = (action: () => void | Promise<void>) => {
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const restore = () => window.scrollTo(scrollX, scrollY);
+    const result = action();
+    requestAnimationFrame(restore);
+    window.setTimeout(restore, 0);
+    window.setTimeout(restore, 120);
+    window.setTimeout(restore, 300);
+    window.setTimeout(restore, 600);
+    if (result && typeof (result as Promise<void>).finally === "function") {
+      (result as Promise<void>).finally(() => requestAnimationFrame(restore));
+    }
+  };
+
   useEffect(() => {
     setLoading(true);
     getLocationReports(locationId)
@@ -143,7 +158,12 @@ export default function ReportsList({ locationId }: Props) {
                 <span className="rl-meta">
                   <button
                     className="rl-reporter-name"
-                    onClick={() => handleNameClick(r.userName)}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      keepViewInPlace(() => handleNameClick(r.userName));
+                    }}
                     title="View CrowdLens Points"
                   >
                     {r.userName}
@@ -158,7 +178,12 @@ export default function ReportsList({ locationId }: Props) {
               <div className="rl-votes">
                 <button
                   className={`rl-vote-btn up ${r.userVote === "Up" ? "active" : ""}`}
-                  onClick={() => handleVote(r.id, "Up")}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    keepViewInPlace(() => handleVote(r.id, "Up"));
+                  }}
                   disabled={isVoting}
                   title="Upvote"
                 >
@@ -169,7 +194,12 @@ export default function ReportsList({ locationId }: Props) {
                 </span>
                 <button
                   className={`rl-vote-btn down ${r.userVote === "Down" ? "active" : ""}`}
-                  onClick={() => handleVote(r.id, "Down")}
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    keepViewInPlace(() => handleVote(r.id, "Down"));
+                  }}
                   disabled={isVoting}
                   title="Downvote"
                 >
@@ -183,11 +213,21 @@ export default function ReportsList({ locationId }: Props) {
 
       {/* Reporter profile popup */}
       {profile && (
-        <div className="rp-overlay" onClick={closeProfile}>
+        <div className="rp-overlay" onClick={() => keepViewInPlace(closeProfile)}>
           <div className="rp-card" onClick={(e) => e.stopPropagation()}>
             <div className="rp-header">
               <span className="rp-title">Reporter Profile</span>
-              <button className="rp-close" onClick={closeProfile}>✕</button>
+              <button
+                className="rp-close"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  keepViewInPlace(closeProfile);
+                }}
+              >
+                ✕
+              </button>
             </div>
 
             <div className="rp-body">
