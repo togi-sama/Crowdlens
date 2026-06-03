@@ -12,18 +12,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("react", 
-        policy =>
-        {
-            var allowedOrigins = builder.Configuration
-                .GetSection("Cors:AllowedOrigins")
-                .Get<string[]>() ?? new[] { "http://localhost:5173" };
-
-            policy.WithOrigins(allowedOrigins)
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-}); 
+    options.AddPolicy("react", policy =>
+    {
+        policy.WithOrigins(
+            "http://localhost:5173",
+            "https://crowdlens-polished.vercel.app"
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();  // for ForecastController → Python LSTM service
