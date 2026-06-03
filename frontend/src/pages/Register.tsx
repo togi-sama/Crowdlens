@@ -100,6 +100,10 @@ export default function Register() {
       toastSuccess("Registration successful! Redirecting to login…");
       setTimeout(() => navigate("/"), 1800);
     } catch (err: any) {
+      if (!err.response) {
+        toastError("Cannot reach the backend. Start the API server and try again.");
+        return;
+      }
       toastError(getRegisterErrorMessage(err.response?.data));
     } finally {
       setLoading(false);

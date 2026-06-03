@@ -15,7 +15,11 @@ builder.Services.AddCors(options =>
     options.AddPolicy("react", 
         policy =>
         {
-            policy.WithOrigins("http://localhost:5173") // React port
+            var allowedOrigins = builder.Configuration
+                .GetSection("Cors:AllowedOrigins")
+                .Get<string[]>() ?? new[] { "http://localhost:5173" };
+
+            policy.WithOrigins(allowedOrigins)
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
@@ -102,10 +106,13 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+app.UseCors("react");
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseCors("react");
 app.MapControllers();
 
 app.Run();
