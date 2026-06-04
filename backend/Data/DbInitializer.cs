@@ -82,6 +82,17 @@ public static class DbInitializer
                 LastUpdated = DateTime.Now,
                 VotesVeryLow = 5, VotesLow = 10, VotesMedium = 15, VotesHigh = 20, VotesVeryHigh = 25,
             },
+            new Location
+            {
+                LocationName = "La Citadella",
+                Type = "Residential Area",
+                Capacity = 500,
+                UserCount = 50,
+                Latitude = 10.2925,
+                Longitude = 123.9000,
+                LastUpdated = DateTime.Now,
+                VotesVeryLow = 10, VotesLow = 15, VotesMedium = 2, VotesHigh = 0, VotesVeryHigh = 0,
+            }
         };
 
         foreach (var location in locations)
