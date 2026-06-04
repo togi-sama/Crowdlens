@@ -17,7 +17,7 @@ namespace Crowdlens_backend.Controllers
         private readonly CrowdLensDbContext _context;
 
         private static readonly HashSet<string> ValidThresholds =
-            new() { "None", "Very Low", "Low", "Medium" };
+            new() { "None", "Very Low", "Low", "Medium" };  
 
         public FavoritesController(CrowdLensDbContext context)
         {

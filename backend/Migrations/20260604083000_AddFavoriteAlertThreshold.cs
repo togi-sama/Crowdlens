@@ -10,20 +10,13 @@ namespace Crowdlens_backend.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "AlertThreshold",
-                table: "Favorites",
-                type: "TEXT",
-                nullable: false,
-                defaultValue: "Low");
+            // The Favorites table was introduced without complete migration metadata
+            // in some deployments. DbInitializer repairs this column idempotently.
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "AlertThreshold",
-                table: "Favorites");
         }
     }
 }

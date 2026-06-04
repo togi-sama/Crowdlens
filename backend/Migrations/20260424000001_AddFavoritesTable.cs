@@ -11,38 +11,27 @@ namespace Crowdlens_backend.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Favorites",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    LocationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AddedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Favorites", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Favorites_Locations_LocationId",
-                        column: x => x.LocationId,
-                        principalTable: "Locations",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
+            migrationBuilder.Sql(@"
+                CREATE TABLE IF NOT EXISTS ""Favorites"" (
+                    ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_Favorites"" PRIMARY KEY AUTOINCREMENT,
+                    ""UserId"" TEXT NOT NULL,
+                    ""LocationId"" INTEGER NOT NULL,
+                    ""AddedAt"" TEXT NOT NULL,
+                    ""AlertThreshold"" TEXT NOT NULL DEFAULT 'Low',
+                    CONSTRAINT ""FK_Favorites_Locations_LocationId""
+                        FOREIGN KEY (""LocationId"") REFERENCES ""Locations"" (""Id"") ON DELETE CASCADE
+                );
+            ");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorites_LocationId",
-                table: "Favorites",
-                column: "LocationId");
+            migrationBuilder.Sql(@"
+                CREATE INDEX IF NOT EXISTS ""IX_Favorites_LocationId""
+                ON ""Favorites"" (""LocationId"");
+            ");
 
-            // Composite unique index so a user can only favorite a location once
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorites_UserId_LocationId",
-                table: "Favorites",
-                columns: new[] { "UserId", "LocationId" },
-                unique: true);
+            migrationBuilder.Sql(@"
+                CREATE UNIQUE INDEX IF NOT EXISTS ""IX_Favorites_UserId_LocationId""
+                ON ""Favorites"" (""UserId"", ""LocationId"");
+            ");
         }
 
         /// <inheritdoc />

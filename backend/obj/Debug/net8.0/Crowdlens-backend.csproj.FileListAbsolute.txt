@@ -532,3 +532,13 @@ D:\3rd Year UP - Comsci\Crowdlens\backend\obj\Debug\net8.0\refint\Crowdlens-back
 D:\3rd Year UP - Comsci\Crowdlens\backend\obj\Debug\net8.0\Crowdlens-backend.pdb
 D:\3rd Year UP - Comsci\Crowdlens\backend\obj\Debug\net8.0\Crowdlens-backend.genruntimeconfig.cache
 D:\3rd Year UP - Comsci\Crowdlens\backend\obj\Debug\net8.0\ref\Crowdlens-backend.dll
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.csproj.AssemblyReference.cache
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.AssemblyInfoInputs.cache
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.AssemblyInfo.cs
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.csproj.CoreCompileInputs.cache
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.dll
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\refint\Crowdlens-backend.dll
+C:\Users\CodexSandboxOffline\.codex\.sandbox\cwd\abb8695207bec714\obj\Debug\net8.0\Crowdlens-backend.pdb

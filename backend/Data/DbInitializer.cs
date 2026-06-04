@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using CrowdLens.Data;
 using Crowdlens_backend.Models;
@@ -10,6 +11,7 @@ public static class DbInitializer
     public static void Seed(CrowdLensDbContext context)
     {
         context.Database.EnsureCreated();
+        EnsureFavoritesSchema(context);
 
         // --- Ensure ForecastRecords table exists for databases created before this feature ---
         context.Database.ExecuteSqlRaw(@"
@@ -94,6 +96,51 @@ public static class DbInitializer
         {
             SeedForecastRecords(context);
         }
+    }
+
+    private static void EnsureFavoritesSchema(CrowdLensDbContext context)
+    {
+        context.Database.ExecuteSqlRaw(@"
+            CREATE TABLE IF NOT EXISTS ""Favorites"" (
+                ""Id"" INTEGER NOT NULL CONSTRAINT ""PK_Favorites"" PRIMARY KEY AUTOINCREMENT,
+                ""UserId"" TEXT NOT NULL,
+                ""LocationId"" INTEGER NOT NULL,
+                ""AddedAt"" TEXT NOT NULL,
+                ""AlertThreshold"" TEXT NOT NULL DEFAULT 'Low',
+                CONSTRAINT ""FK_Favorites_Locations_LocationId""
+                    FOREIGN KEY (""LocationId"") REFERENCES ""Locations"" (""Id"") ON DELETE CASCADE
+            )
+        ");
+
+        var connection = context.Database.GetDbConnection();
+        var shouldClose = connection.State != ConnectionState.Open;
+        if (shouldClose)
+            connection.Open();
+
+        using var command = connection.CreateCommand();
+        command.CommandText = "SELECT COUNT(1) FROM pragma_table_info('Favorites') WHERE name = 'AlertThreshold'";
+        var hasAlertThreshold = Convert.ToInt32(command.ExecuteScalar()) > 0;
+
+        if (shouldClose)
+            connection.Close();
+
+        if (!hasAlertThreshold)
+        {
+            context.Database.ExecuteSqlRaw(@"
+                ALTER TABLE ""Favorites""
+                ADD ""AlertThreshold"" TEXT NOT NULL DEFAULT 'Low'
+            ");
+        }
+
+        context.Database.ExecuteSqlRaw(@"
+            CREATE INDEX IF NOT EXISTS ""IX_Favorites_LocationId""
+            ON ""Favorites"" (""LocationId"")
+        ");
+
+        context.Database.ExecuteSqlRaw(@"
+            CREATE UNIQUE INDEX IF NOT EXISTS ""IX_Favorites_UserId_LocationId""
+            ON ""Favorites"" (""UserId"", ""LocationId"")
+        ");
     }
 
     // -----------------------------------------------------------------------
