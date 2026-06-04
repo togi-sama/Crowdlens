@@ -88,8 +88,8 @@ public static class DbInitializer
                 Type = "Residential Area",
                 Capacity = 500,
                 UserCount = 50,
-                Latitude = 10.36365,
-                Longitude = 123.92363,
+                Latitude = 10.364,
+                Longitude = 123.92385,
                 LastUpdated = DateTime.Now,
                 VotesVeryLow = 10, VotesLow = 15, VotesMedium = 2, VotesHigh = 0, VotesVeryHigh = 0,
             }
