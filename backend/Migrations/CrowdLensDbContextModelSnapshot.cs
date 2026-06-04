@@ -26,6 +26,10 @@ namespace Crowdlens_backend.Migrations
                     b.Property<DateTime>("AddedAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("AlertThreshold")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("LocationId")
                         .HasColumnType("INTEGER");
 
@@ -37,10 +41,31 @@ namespace Crowdlens_backend.Migrations
 
                     b.HasIndex("LocationId");
 
-                    b.HasIndex("UserId", "LocationId")
-                        .IsUnique();
-
                     b.ToTable("Favorites");
+                });
+
+            modelBuilder.Entity("Crowdlens_backend.Models.ForecastRecord", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DensityLevel")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("DensityScore")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("RecordedAt")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ForecastRecords");
                 });
 
             modelBuilder.Entity("Crowdlens_backend.Models.Location", b =>

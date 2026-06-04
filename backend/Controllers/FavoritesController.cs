@@ -100,6 +100,9 @@ namespace Crowdlens_backend.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
 
+            if (dto == null)
+                return BadRequest("Request body is required.");
+
             if (!ValidThresholds.Contains(dto.AlertThreshold))
                 return BadRequest($"Invalid threshold. Allowed: {string.Join(", ", ValidThresholds)}");
 
@@ -136,6 +139,9 @@ namespace Crowdlens_backend.Controllers
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (userId == null) return Unauthorized();
+
+            if (dto == null)
+                return BadRequest("Request body is required.");
 
             if (!ValidThresholds.Contains(dto.AlertThreshold))
                 return BadRequest($"Invalid threshold. Allowed: {string.Join(", ", ValidThresholds)}");
